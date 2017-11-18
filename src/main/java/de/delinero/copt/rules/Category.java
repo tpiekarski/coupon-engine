@@ -1,9 +1,13 @@
 package de.delinero.copt.rules;
 
+import de.delinero.copt.models.Cart;
+import de.delinero.copt.models.Coupon;
+import de.delinero.copt.models.CouponRule;
 import org.jeasy.rules.api.Facts;
-import org.jeasy.rules.core.BasicRule;
 
-public class Category extends BasicRule {
+import java.util.Optional;
+
+public class Category extends AbstractCouponRule {
 
     public Category() {
         super("Category");
@@ -11,11 +15,18 @@ public class Category extends BasicRule {
 
     @Override
     public boolean evaluate(Facts facts) {
-        return super.evaluate(facts);
+        Coupon coupon = (Coupon) facts.get("coupon");
+        Cart cart = (Cart) facts.get("cart");
+
+        Optional<CouponRule> rule = coupon.getRuleByName(this.name);
+
+        if (! rule.isPresent()) {
+            return false;
+        }
+
+        return cart.getItems().stream().allMatch(
+            (item) -> item.getCategory().equals(rule.get().getOption())
+        );
     }
 
-    @Override
-    public void execute(Facts facts) throws Exception {
-        super.execute(facts);
-    }
 }
