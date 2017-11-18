@@ -4,7 +4,6 @@ import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.Coupon;
 import de.delinero.copt.models.CouponRule;
 import org.jeasy.rules.api.Facts;
-import org.jeasy.rules.core.BasicRule;
 
 import java.util.Optional;
 

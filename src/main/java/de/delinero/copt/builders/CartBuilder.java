@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class CartBuilder {
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     @Inject
     public CartBuilder(ObjectMapper objectMapper) {

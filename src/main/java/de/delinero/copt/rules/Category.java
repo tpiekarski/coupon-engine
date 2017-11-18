@@ -20,13 +20,12 @@ public class Category extends AbstractCouponRule {
 
         Optional<CouponRule> rule = coupon.getRuleByName(this.name);
 
-        if (! rule.isPresent()) {
-            return false;
-        }
+        return
+            rule.isPresent() &&
+            cart.getItems().stream().allMatch(
+                (item) -> item.getCategory().equals(rule.get().getOption())
+            );
 
-        return cart.getItems().stream().allMatch(
-            (item) -> item.getCategory().equals(rule.get().getOption())
-        );
     }
 
 }

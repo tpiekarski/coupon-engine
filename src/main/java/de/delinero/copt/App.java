@@ -19,7 +19,6 @@ public class App {
 
         CartBuilder cartBuilder = injector.getInstance(CartBuilder.class);
         CouponBuilder couponBuilder = injector.getInstance(CouponBuilder.class);
-
         CouponEngine couponEngine = injector.getInstance(CouponEngine.class);
 
         Cart cart = cartBuilder.build(getPayload(args[0]));

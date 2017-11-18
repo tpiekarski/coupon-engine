@@ -11,6 +11,7 @@ public abstract class AbstractCouponRule extends BasicRule {
         super(name);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void execute(Facts facts) throws Exception {
         HashMap<String, Boolean> results = (HashMap<String, Boolean>) facts.get("results");

@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class CouponBuilder {
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     @Inject
     public CouponBuilder(ObjectMapper objectMapper) {

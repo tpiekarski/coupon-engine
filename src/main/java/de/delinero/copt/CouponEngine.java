@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class CouponEngine {
 
-    private RulesEngine rulesEngine;
+    private final RulesEngine rulesEngine;
 
     public CouponEngine() {
         this.rulesEngine = RulesEngineBuilder.aNewRulesEngine().withSilentMode(false).build();
@@ -31,9 +31,7 @@ public class CouponEngine {
 
         rulesEngine.fire(rulesSet, facts);
 
-        List<Boolean> finalResults = extractBooleans(results);
-
-        return ! finalResults.contains(false);
+        return ! extractBooleans(results).contains(false);
     }
 
     private Facts establishFacts(Cart cart, Coupon coupon, String code, HashMap<String, Boolean> results) {
@@ -61,9 +59,7 @@ public class CouponEngine {
     private HashMap<String, Boolean> initializeResults(Rules rulesSet) {
         HashMap<String, Boolean> results = new HashMap<>();
 
-        rulesSet.forEach((rule) -> {
-            results.put(rule.getName(), false);
-        });
+        rulesSet.forEach((rule) -> results.put(rule.getName(), false));
 
         return results;
     }
