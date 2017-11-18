@@ -20,7 +20,6 @@ public class ValidCode extends AbstractCouponRule {
         Optional<CouponRule> rule = coupon.getRuleByName(this.name);
 
         return rule.isPresent() && rule.get().getOption().equals(code);
-
     }
 
 }

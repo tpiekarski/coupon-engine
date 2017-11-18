@@ -1,15 +1,10 @@
 {
   "discount": 20,
   "type": "percentage",
-  "target": "cart",
   "rules": [
     {
       "rule": "ValidCode",
       "option": "ABC"
-    },
-    {
-      "rule": "MinimumCartValue",
-      "option": "35"
     }
   ]
 }

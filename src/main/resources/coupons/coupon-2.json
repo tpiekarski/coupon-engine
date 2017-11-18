@@ -1,16 +1,14 @@
 {
-  "code": "ABC",
   "discount": 20,
   "type": "percentage",
-  "target": "cart",
   "rules": [
+    {
+      "rule": "ValidCode",
+      "option": "ABC"
+    },
     {
       "rule": "MinimumCartValue",
       "option": "35"
-    },
-    {
-      "rule": "TimeFrame",
-      "option": "2018-01-01"
     }
   ]
 }

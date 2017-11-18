@@ -1,10 +1,8 @@
 package de.delinero.copt;
 
-import com.google.common.collect.Lists;
 import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.Coupon;
 import de.delinero.copt.models.CouponRule;
-import de.delinero.copt.rules.ValidCode;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.api.RulesEngine;
@@ -24,12 +22,12 @@ public class CouponEngine {
     }
 
     public Boolean evaluate(Cart cart, Coupon coupon, String code) {
-        HashMap<String, Boolean> results = new HashMap<>();
-
-        Facts facts = establishFacts(cart, coupon, code, results);
-
         Rules rulesSet = new Rules();
         registerRules(rulesSet, coupon.getRules());
+
+        HashMap<String, Boolean> results = initializeResults(rulesSet);
+
+        Facts facts = establishFacts(cart, coupon, code, results);
 
         rulesEngine.fire(rulesSet, facts);
 
@@ -58,6 +56,16 @@ public class CouponEngine {
                 break;
             }
         }
+    }
+
+    private HashMap<String, Boolean> initializeResults(Rules rulesSet) {
+        HashMap<String, Boolean> results = new HashMap<>();
+
+        rulesSet.forEach((rule) -> {
+            results.put(rule.getName(), false);
+        });
+
+        return results;
     }
 
     private List<Boolean> extractBooleans(HashMap<String, Boolean> results) {

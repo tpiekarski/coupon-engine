@@ -17,6 +17,10 @@
     {
       "rule": "Category",
       "option": "Cheese"
+    },
+    {
+      "rule": "Exclude",
+      "option": "E1000-020"
     }
   ]
 }

@@ -1,9 +1,17 @@
 package de.delinero.copt.rules;
 
+import de.delinero.copt.models.Coupon;
+import de.delinero.copt.models.CouponRule;
 import org.jeasy.rules.api.Facts;
-import org.jeasy.rules.core.BasicRule;
 
-public class TimeFrame extends BasicRule {
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Optional;
+import java.util.TimeZone;
+
+public class TimeFrame extends AbstractCouponRule {
 
     public TimeFrame() {
         super("TimeFrame");
@@ -11,11 +19,31 @@ public class TimeFrame extends BasicRule {
 
     @Override
     public boolean evaluate(Facts facts) {
-        return super.evaluate(facts);
+        Coupon coupon = (Coupon) facts.get("coupon");
+
+        Optional<CouponRule> rule = coupon.getRuleByName(this.name);
+
+        if (! rule.isPresent()) {
+            return false;
+        }
+
+        Date today = new Date();
+        Date parsedDate = parseDate(rule.get().getOption());
+
+        return today.before(parsedDate);
     }
 
-    @Override
-    public void execute(Facts facts) throws Exception {
-        super.execute(facts);
+    private Date parseDate(String date) {
+
+        if (! System.getProperty("user.timezone").equals("UTC")) {
+            TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        }
+
+        return Date.from(
+            LocalDate.parse(
+                date, DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            ).atStartOfDay().toInstant(ZoneOffset.UTC)
+        );
     }
+
 }
