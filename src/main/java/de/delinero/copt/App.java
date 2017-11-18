@@ -31,7 +31,7 @@ public class App {
 
         Boolean result = couponEngine.evaluate(cart, coupon, args[2]);
 
-        System.out.printf("The result is of coupon evaluation is %s.\n", result);
+        System.out.printf("\nThe result of the coupon evaluation is %s.\n", result);
     }
 
     private static String getPayload(String filename) {
