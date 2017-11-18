@@ -15,6 +15,11 @@ import java.nio.charset.StandardCharsets;
 public class App {
 
     public static void main(String[] args) {
+        if (checkArguments(args)) {
+            System.out.printf("Usage: copt <cart.json> <coupon.json> <coupon code>\n");
+            return;
+        }
+
         Injector injector = Guice.createInjector(new CouponEngineModule());
 
         CartBuilder cartBuilder = injector.getInstance(CartBuilder.class);
@@ -38,6 +43,10 @@ public class App {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    private static Boolean checkArguments(String[] args) {
+        return (args.length != 3);
     }
 
 }
