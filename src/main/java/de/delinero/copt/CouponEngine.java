@@ -18,7 +18,11 @@ public class CouponEngine {
     private final RulesEngine rulesEngine;
 
     public CouponEngine() {
-        this.rulesEngine = RulesEngineBuilder.aNewRulesEngine().withSilentMode(false).build();
+        this(true);
+    }
+
+    public CouponEngine(Boolean silent) {
+        this.rulesEngine = RulesEngineBuilder.aNewRulesEngine().withSilentMode(silent).build();
     }
 
     public Boolean evaluate(Cart cart, Coupon coupon, String code) {

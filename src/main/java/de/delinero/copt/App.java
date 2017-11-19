@@ -14,9 +14,14 @@ import java.nio.charset.StandardCharsets;
 
 public class App {
 
+    private static Boolean silent;
+
     public static void main(String[] args) {
-        if (checkArguments(args)) {
-            System.out.printf("Usage: copt <cart.json> <coupon.json> <coupon code>\n");
+        if (! checkArguments(args)) {
+            System.out.printf(
+                "Usage: java -cp <classpath> de.delinero.copt.App " +
+                "<cart.json> <coupon.json> <coupon code> [<silent>]\n"
+            );
             return;
         }
 
@@ -24,7 +29,7 @@ public class App {
 
         CartBuilder cartBuilder = injector.getInstance(CartBuilder.class);
         CouponBuilder couponBuilder = injector.getInstance(CouponBuilder.class);
-        CouponEngine couponEngine = injector.getInstance(CouponEngine.class);
+        CouponEngine couponEngine = new CouponEngine(silent);
 
         Cart cart = cartBuilder.build(getPayload(args[0]));
         Coupon coupon = couponBuilder.build(getPayload(args[1]));
@@ -46,7 +51,15 @@ public class App {
     }
 
     private static Boolean checkArguments(String[] args) {
-        return (args.length != 3);
+        if (args.length == 3) {
+            silent = true;
+        } else if (args.length == 4) {
+            silent = Boolean.valueOf(args[3]);
+        } else {
+            return false;
+        }
+
+        return true;
     }
 
 }
