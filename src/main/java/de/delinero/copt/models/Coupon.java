@@ -2,6 +2,7 @@ package de.delinero.copt.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,21 +11,18 @@ public class Coupon {
     @JsonProperty("type")
     private String type;
 
-    @JsonProperty("target")
-    private String target;
-
     @JsonProperty("discount")
     private Integer discount;
 
     @JsonProperty("rules")
-    private List<CouponRule> rules;
+    private final List<CouponRule> rules;
+
+    public Coupon() {
+        rules = new ArrayList<>();
+    }
 
     public String getType() {
         return type;
-    }
-
-    public String getTarget() {
-        return target;
     }
 
     public Integer getDiscount() {
@@ -37,5 +35,9 @@ public class Coupon {
 
     public Optional<CouponRule> getRuleByName(String name) {
         return rules.stream().filter((rule) -> (rule.getRuleName().equals(name))).findFirst();
+    }
+
+    public void addRule(CouponRule rule) {
+        rules.add(rule);
     }
 }
