@@ -1,9 +1,10 @@
 package de.delinero.copt.rules;
 
+import de.delinero.copt.models.EvaluatedResult;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.core.BasicRule;
 
-import java.util.HashMap;
+import java.util.List;
 
 public abstract class AbstractCouponRule extends BasicRule {
 
@@ -14,8 +15,13 @@ public abstract class AbstractCouponRule extends BasicRule {
     @SuppressWarnings("unchecked")
     @Override
     public void execute(Facts facts) throws Exception {
-        HashMap<String, Boolean> results = (HashMap<String, Boolean>) facts.get("results");
-        results.put(name, true);
+        List<EvaluatedResult> results = (List<EvaluatedResult>) facts.get("results");
+
+        results.stream()
+            .filter((result) -> result.getRuleName().equals(this.name))
+            .findFirst()
+            .ifPresent(evaluatedResult -> evaluatedResult.setResult(true));
+
         facts.remove("results");
         facts.put("results", results);
     }

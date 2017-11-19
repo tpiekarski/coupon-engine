@@ -1,8 +1,8 @@
 package de.delinero.copt.rules;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.delinero.copt.CouponEngine;
-import de.delinero.copt.FixtureLoader;
+import de.delinero.copt.engines.CouponEngine;
+import de.delinero.copt.utils.FixtureLoader;
 import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.Coupon;
 import junit.framework.Test;

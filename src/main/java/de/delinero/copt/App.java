@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import de.delinero.copt.builders.CartBuilder;
 import de.delinero.copt.builders.CouponBuilder;
+import de.delinero.copt.engines.CouponEngine;
 import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.Coupon;
 import de.delinero.copt.modules.CouponEngineModule;

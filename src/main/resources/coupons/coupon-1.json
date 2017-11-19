@@ -6,5 +6,6 @@
       "rule": "ValidCode",
       "option": "ABC"
     }
-  ]
+  ],
+  "expression": "#ValidCode"
 }

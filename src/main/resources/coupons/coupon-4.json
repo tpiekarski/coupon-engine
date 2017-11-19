@@ -18,5 +18,6 @@
       "rule": "Category",
       "option": "Cheese"
     }
-  ]
+  ],
+  "expression": "#ValidCode and #MinimumCartValue and #Expiration and #Category"
 }

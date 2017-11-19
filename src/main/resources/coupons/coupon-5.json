@@ -22,5 +22,6 @@
       "rule": "Exclude",
       "option": "E1000-020"
     }
-  ]
+  ],
+  "expression": "#ValidCode and #MinimumCartValue and #Expiration and #Category and #Exclude"
 }

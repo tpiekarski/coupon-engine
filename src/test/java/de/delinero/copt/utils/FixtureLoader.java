@@ -1,4 +1,4 @@
-package de.delinero.copt;
+package de.delinero.copt.utils;
 
 import org.apache.commons.io.IOUtils;
 

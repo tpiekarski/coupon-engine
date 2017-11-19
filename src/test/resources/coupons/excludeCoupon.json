@@ -6,5 +6,6 @@
       "rule": "Exclude",
       "option": "E1000-001"
     }
-  ]
+  ],
+  "expression": "#Exclude"
 }

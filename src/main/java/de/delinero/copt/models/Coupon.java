@@ -17,6 +17,9 @@ public class Coupon {
     @JsonProperty("rules")
     private final List<CouponRule> rules;
 
+    @JsonProperty("expression")
+    private String expression;
+
     public Coupon() {
         rules = new ArrayList<>();
     }
@@ -39,5 +42,13 @@ public class Coupon {
 
     public void addRule(CouponRule rule) {
         rules.add(rule);
+    }
+
+    public String getExpression() {
+        return expression;
+    }
+
+    public void setExpression(String expression) {
+        this.expression = expression;
     }
 }

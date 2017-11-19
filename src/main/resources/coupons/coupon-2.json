@@ -10,5 +10,6 @@
       "rule": "MinimumCartValue",
       "option": "35"
     }
-  ]
+  ],
+  "expression": "#ValidCode and #MinimumCartValue"
 }
