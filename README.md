@@ -1,5 +1,7 @@
-CLI prototype for a coupon engine driven by [easy rules](https://github.com/j-easy/easy-rules)
+CLI prototype for a coupon engine
 ---
+A CLI prototype for evaluation coupon rules driven by [Easy Rules](https://github.com/j-easy/easy-rules)
+and [Spring Expression Language](https://docs.spring.io/spring/docs/4.3.12.RELEASE/spring-framework-reference/html/expressions.html). 
 
 ### Build & Usage
 ```
@@ -63,6 +65,7 @@ silent | Optional boolean for silencing easy rules
       "rule": "Exclude",
       "option": "E1000-020"
     }
-  ]
+  ],
+     "expression": "#ValidCode and #MinimumCartValue and #Expiration and #Category and #Exclude"
 }
 ```
