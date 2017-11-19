@@ -61,12 +61,12 @@ public class RulesTest extends TestCase {
         assertTrue(couponEngine.evaluate(testCart, testCoupon, "ABC"));
     }
 
-    public void testTimeFrameRule() throws IOException {
+    public void testExpirationRule() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
         Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/timeFrameCoupon.json"), Coupon.class
+            FixtureLoader.loadAsString("/coupons/expirationCoupon.json"), Coupon.class
         );
 
         CouponEngine couponEngine = new CouponEngine();

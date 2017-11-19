@@ -3,7 +3,7 @@
   "type": "percentage",
   "rules": [
     {
-      "rule": "TimeFrame",
+      "rule": "Expiration",
       "option": "2017-01-01"
     }
   ]

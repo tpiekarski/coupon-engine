@@ -1,4 +1,4 @@
 {
-  "rule": "TimeFrame",
+  "rule": "Expiration",
   "option": "2020-01-01"
 }

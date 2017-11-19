@@ -11,7 +11,7 @@
       "option": "35"
     },
     {
-      "rule": "TimeFrame",
+      "rule": "Expiration",
       "option": "2018-01-01"
     }
   ]

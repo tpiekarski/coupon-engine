@@ -11,10 +11,10 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.TimeZone;
 
-public class TimeFrame extends AbstractCouponRule {
+public class Expiration extends AbstractCouponRule {
 
-    public TimeFrame() {
-        super("TimeFrame");
+    public Expiration() {
+        super("Expiration");
     }
 
     @Override
