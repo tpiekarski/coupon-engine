@@ -1,4 +1,5 @@
-/.idea 
+/.idea
 /*.iml
 /dependency-reduced-pom.xml
 /target
+/.scannerwork
