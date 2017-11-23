@@ -37,7 +37,7 @@ public class Coupon {
     }
 
     public Optional<CouponRule> getRuleByName(String name) {
-        return rules.stream().filter((rule) -> (rule.getRuleName().equals(name))).findFirst();
+        return rules.stream().filter(rule -> (rule.getRuleName().equals(name))).findFirst();
     }
 
     public void addRule(CouponRule rule) {

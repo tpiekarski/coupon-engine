@@ -16,7 +16,7 @@ public class CouponExpressionEngine {
 
     public Boolean parse(String couponExpression, List<EvaluatedResult> evaluatedResults) {
         StandardEvaluationContext context = new StandardEvaluationContext();
-        evaluatedResults.forEach((result) -> context.setVariable(result.getRuleName(), result.getResult()));
+        evaluatedResults.forEach(result -> context.setVariable(result.getRuleName(), result.getResult()));
 
         return (Boolean) parser.parseExpression(couponExpression).getValue(context);
     }

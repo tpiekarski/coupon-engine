@@ -8,6 +8,8 @@ import java.util.List;
 
 public abstract class AbstractCouponRule extends BasicRule {
 
+    private static final String RESULTS_FACTS_KEY_NAME = "results";
+
     public AbstractCouponRule(String name) {
         super(name);
     }
@@ -15,15 +17,15 @@ public abstract class AbstractCouponRule extends BasicRule {
     @SuppressWarnings("unchecked")
     @Override
     public void execute(Facts facts) throws Exception {
-        List<EvaluatedResult> results = (List<EvaluatedResult>) facts.get("results");
+        List<EvaluatedResult> results = (List<EvaluatedResult>) facts.get(RESULTS_FACTS_KEY_NAME);
 
         results.stream()
-            .filter((result) -> result.getRuleName().equals(this.name))
+            .filter(result -> result.getRuleName().equals(this.name))
             .findFirst()
             .ifPresent(evaluatedResult -> evaluatedResult.setResult(true));
 
-        facts.remove("results");
-        facts.put("results", results);
+        facts.remove(RESULTS_FACTS_KEY_NAME);
+        facts.put(RESULTS_FACTS_KEY_NAME, results);
     }
 
 }

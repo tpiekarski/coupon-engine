@@ -22,7 +22,7 @@ public class Exclude extends AbstractCouponRule {
 
         return
             rule.isPresent() &&
-            cart.getItems().stream().noneMatch((item) -> item.getSku().equals(rule.get().getOption()));
+            cart.getItems().stream().noneMatch(item -> item.getSku().equals(rule.get().getOption()));
 
     }
 

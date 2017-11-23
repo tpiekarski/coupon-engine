@@ -23,7 +23,7 @@ public class Category extends AbstractCouponRule {
         return
             rule.isPresent() &&
             cart.getItems().stream().allMatch(
-                (item) -> item.getCategory().equals(rule.get().getOption())
+                item -> item.getCategory().equals(rule.get().getOption())
             );
 
     }

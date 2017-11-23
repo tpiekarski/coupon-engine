@@ -11,9 +11,7 @@ import org.jeasy.rules.core.RulesEngineBuilder;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CouponEngine {
 
@@ -65,19 +63,9 @@ public class CouponEngine {
 
     private List<EvaluatedResult> initializeResults(Rules rulesSet) {
         List<EvaluatedResult> results = new ArrayList<>();
-        rulesSet.forEach(((rule) -> results.add(new EvaluatedResult(rule.getName(), false))) );
+        rulesSet.forEach((rule -> results.add(new EvaluatedResult(rule.getName(), false))) );
 
         return results;
-    }
-
-    private List<Boolean> extractBooleans(HashMap<String, Boolean> results) {
-        List<Boolean> booleans = new ArrayList<>();
-
-        for (Map.Entry<String, Boolean> ruleResult: results.entrySet()) {
-            booleans.add(ruleResult.getValue());
-        }
-
-        return booleans;
     }
 
 }
