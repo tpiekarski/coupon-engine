@@ -8,10 +8,11 @@ import de.delinero.copt.engines.CouponEngine;
 import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.Coupon;
 import de.delinero.copt.modules.CouponEngineModule;
-import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class App {
 
@@ -32,20 +33,17 @@ public class App {
         CouponBuilder couponBuilder = injector.getInstance(CouponBuilder.class);
         CouponEngine couponEngine = new CouponEngine(silent);
 
-        Cart cart = cartBuilder.build(getPayload(args[0]));
-        Coupon coupon = couponBuilder.build(getPayload(args[1]));
+        Cart cart = cartBuilder.build(getPayloadFile(args[0]));
+        Coupon coupon = couponBuilder.build(getPayloadFile(args[1]));
 
         Boolean result = couponEngine.evaluate(cart, coupon, args[2]);
 
         System.out.printf("%nThe result of the coupon evaluation is %s.%n", result);
     }
 
-    private static String getPayload(String filename) {
+    private static String getPayloadFile(String filename) {
         try {
-            return IOUtils.toString(
-                App.class.getResourceAsStream(String.format("/%s", filename)),
-                StandardCharsets.UTF_8
-            );
+            return new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }

@@ -3,14 +3,24 @@ CLI prototype for a coupon engine
 A CLI prototype for evaluation coupon rules driven by [Easy Rules](https://github.com/j-easy/easy-rules)
 and [Spring Expression Language](https://docs.spring.io/spring/docs/4.3.12.RELEASE/spring-framework-reference/html/expressions.html). 
 
-### Build & Usage
+### Build
 ```
 mvn package
-java -cp target/coupon-prototype-1.0-SNAPSHOT.jar de.delinero.copt.App cart.json coupons/coupon-5.json ABC
+```
+
+### Usage
+```
+java -jar target/coupon-prototype-0.0.1-shaded.jar examples/cart.json examples/coupons/coupon-5.json ABC
+```
+
+or using shortcut shell script for launching coupon engine
+
+```
+./coupon-cli.sh examples/cart.json examples/coupons/coupon-5.json ABC
 ```
 
 ### CLI & Parameters
-java -cp *classpath* de.delinero.copt.App *cart* *coupon* *code* *[silent]*
+java -jar target/coupon-prototype-1.0-SNAPSHOT-shaded.jar *cart* *coupon* *code* *[silent]*
 
 Parameter | Description
 --- | ---
