@@ -7,27 +7,28 @@ import de.delinero.copt.utils.CouponRuleBuilder;
 import de.delinero.copt.utils.FixtureLoader;
 import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.Coupon;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.List;
 
-public class ValidationCombinationTest extends TestCase {
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
-    public ValidationCombinationTest(String testName )
-    {
-        super( testName );
+public class ValidationCombinationTest {
+
+    private ObjectMapper objectMapper;
+    private CouponEngine couponEngine;
+
+    @Before
+    public void setUp() {
+        objectMapper = new ObjectMapper();
+        couponEngine = new CouponEngine();
     }
 
-    public static Test suite() {
-        return new TestSuite( ValidationCombinationTest.class );
-    }
-
+    @Test
     public void testANDValidationRulesCombination() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-
         Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
         Coupon testCoupon = objectMapper.readValue(
             FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
@@ -38,14 +39,12 @@ public class ValidationCombinationTest extends TestCase {
         );
 
         CouponRuleBuilder.buildCouponRulesAndExpression(objectMapper, testCoupon, testRulesFixtures);
-        CouponEngine couponEngine = new CouponEngine();
 
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
     }
 
+    @Test
     public void testORValidationCombination() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-
         Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
         Coupon testCoupon = objectMapper.readValue(
             FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
@@ -55,14 +54,12 @@ public class ValidationCombinationTest extends TestCase {
         testCoupon.getValidationRules().setExpression("#ValidCode or #MinimumCartValue");
 
         CouponRuleBuilder.buildCouponRules(objectMapper, testCoupon, testRulesFixtures);
-        CouponEngine couponEngine = new CouponEngine();
 
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
     }
 
+    @Test
     public void testANDandORValidationRulesCombination() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-
         Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
         Coupon testCoupon = objectMapper.readValue(
             FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
@@ -72,14 +69,12 @@ public class ValidationCombinationTest extends TestCase {
         testCoupon.getValidationRules().setExpression("#ValidCode and #Expiration or #MinimumCartValue");
 
         CouponRuleBuilder.buildCouponRules(objectMapper, testCoupon, testRulesFixtures);
-        CouponEngine couponEngine = new CouponEngine();
 
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
     }
 
+    @Test
     public void testANDandNOTValidationRulesCombination() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-
         Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
         Coupon testCoupon = objectMapper.readValue(
             FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
@@ -89,7 +84,6 @@ public class ValidationCombinationTest extends TestCase {
         testCoupon.getValidationRules().setExpression("#ValidCode and not #MinimumCartValue");
 
         CouponRuleBuilder.buildCouponRules(objectMapper, testCoupon, testRulesFixtures);
-        CouponEngine couponEngine = new CouponEngine();
 
         assertFalse(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
     }
