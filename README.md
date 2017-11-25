@@ -7,11 +7,11 @@ and [Spring Expression Language](https://docs.spring.io/spring/docs/4.3.12.RELEA
 This prototype leverages Easy Rules and Spring Expression language for evaluation of coupon rules defined
 in JSON files with an easy and expressive way of defining multiple rules. A set of n rules and their options,
 like a coupon code, a category of products or a minimum cart value are evaluated based upon a cart defined
-in another JSON file. 
+in another JSON file.
 
-The processing is split into two distinct scopes. The first scope is validation scope, in which it is checked
-if a coupon is valid in general. Like if the provided code is valid or if a coupon is not yet expired. 
-The second scope is application, in which it is checked if a valid coupon is applicable to the customers cart.
+The processing is divided into two distinct scopes. The first scope is validation scope, in which the coupon
+is checked for validity. For example if the provided code is valid or if a coupon is not yet expired.
+The second scope is application, in which a valid coupon is checked for application to a cart and its items.
 
 #### Prototyped Rules
 Rule|Option|Scope|Description
@@ -30,28 +30,27 @@ mvn package
 ### Usage
 #### General system-independent usage 
 ```
-java -jar target/coupon-prototype-0.0.2-shaded.jar examples/cart.json examples/coupons/coupon-5.json ABC
+java -jar target/coupon-prototype-0.0.2-shaded.jar examples/cart.json examples/coupon.json
 ```
 
 #### U*NIX-based systems launcher
 ```
-./coupon-cli.sh examples/cart.json examples/coupons/coupon-5.json ABC
+./coupon-cli.sh examples/cart.json examples/coupon.json
 ```
 
 #### Windows-based systems launcher
 ```
-./coupon-cli.bat examples/cart.json examples/coupons/coupon-5.json ABC
+coupon-cli.bat examples/cart.json examples/coupon.json
 ```
 
 ### CLI & Parameters
-java -jar target/coupon-prototype-1.0-SNAPSHOT-shaded.jar *cart* *coupon* *code* *[silent]*
+java -jar target/coupon-prototype-1.0-SNAPSHOT-shaded.jar *cart* *coupon* *[silent]*
 
 Parameter | Description
 --- | ---
 cart | JSON file defining a cart
 coupon | JSON file defining a coupon
-code | A coupon code
-silent | Optional boolean for silencing easy rules
+silent | Optional boolean for silencing easy rules (default is true)
 
 ### JSON Input Files
 #### Carts
