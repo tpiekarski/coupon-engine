@@ -1,0 +1,34 @@
+{
+  "discount": 20,
+  "type": "percentage",
+  "validation": {
+      "rules": [
+        {
+          "rule": "ValidCode",
+          "option": "ABC"
+        },
+        {
+          "rule": "MinimumCartValue",
+          "option": "35"
+        },
+        {
+          "rule": "Expiration",
+          "option": "2018-01-01"
+        }
+      ],
+      "expression": "#ValidCode and #MinimumCartValue and #Expiration"
+    },
+  "application": {
+    "rules": [
+      {
+        "rule": "Category",
+        "option": "Cheese"
+      },
+      {
+        "rule": "Exclude",
+        "option": "E1000-020"
+      }
+    ],
+    "expression": "#Category and #Exclude"
+  }
+}

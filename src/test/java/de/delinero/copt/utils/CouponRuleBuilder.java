@@ -15,16 +15,16 @@ public class CouponRuleBuilder {
         for (Integer n = 0; n < testRulesFixtures.size(); n++) {
             try {
 
-                testCoupon.addRule(objectMapper.readValue(FixtureLoader.loadAsString(
+                testCoupon.getValidationRules().addRule(objectMapper.readValue(FixtureLoader.loadAsString(
                     String.format("/rules/%s.json", testRulesFixtures.get(n))), CouponRule.class
                 ));
 
                 if (n == 0) {
-                    testCoupon.setExpression(String.format("#%s", testRulesFixtures.get(n)));
+                    testCoupon.getValidationRules().setExpression(String.format("#%s", testRulesFixtures.get(n)));
                 } else {
-                    testCoupon.setExpression(String.format(
+                    testCoupon.getValidationRules().setExpression(String.format(
                         "%s and #%s",
-                        testCoupon.getExpression(),
+                        testCoupon.getValidationRules().getExpression(),
                         testRulesFixtures.get(n)
                     ));
                 }
@@ -41,7 +41,7 @@ public class CouponRuleBuilder {
         for (Integer n = 0; n < testRulesFixtures.size(); n++) {
             try {
 
-                testCoupon.addRule(objectMapper.readValue(FixtureLoader.loadAsString(
+                testCoupon.getValidationRules().addRule(objectMapper.readValue(FixtureLoader.loadAsString(
                     String.format("/rules/%s.json", testRulesFixtures.get(n))), CouponRule.class
                 ));
 

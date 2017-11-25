@@ -7,6 +7,7 @@ import de.delinero.copt.builders.CouponBuilder;
 import de.delinero.copt.engines.CouponEngine;
 import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.Coupon;
+import de.delinero.copt.models.Message;
 import de.delinero.copt.modules.CouponEngineModule;
 
 import java.io.*;
@@ -24,6 +25,7 @@ public class App {
                 "Usage: java -cp <classpath> de.delinero.copt.App " +
                 "<cart.json> <coupon.json> [<silent>]%n"
             );
+
             return;
         }
 
@@ -36,9 +38,10 @@ public class App {
         Cart cart = cartBuilder.build(getPayloadFile(args[0]));
         Coupon coupon = couponBuilder.build(getPayloadFile(args[1]));
 
-        Boolean result = couponEngine.evaluate(cart, coupon);
+        Boolean validationResult = couponEngine.evaluate(cart, coupon.getValidationRules());
+        Boolean applicationResult = couponEngine.evaluate(cart, coupon.getApplicationRules());
 
-        System.out.printf("%nThe result of the coupon evaluation is %s.%n", result);
+        System.out.printf(Message.getMessageByResults(validationResult, applicationResult));
     }
 
     private static String getPayloadFile(String filename) {

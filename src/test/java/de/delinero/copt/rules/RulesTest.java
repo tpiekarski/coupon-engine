@@ -27,12 +27,12 @@ public class RulesTest extends TestCase {
 
         Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
         Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/categoryCoupon.json"), Coupon.class
+            FixtureLoader.loadAsString("/coupons/application/categoryCoupon.json"), Coupon.class
         );
 
         CouponEngine couponEngine = new CouponEngine();
 
-        assertTrue(couponEngine.evaluate(testCart, testCoupon));
+        assertTrue(couponEngine.evaluate(testCart, testCoupon.getApplicationRules()));
     }
 
     public void testExcludeRule() throws IOException {
@@ -40,12 +40,12 @@ public class RulesTest extends TestCase {
 
         Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
         Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/excludeCoupon.json"), Coupon.class
+            FixtureLoader.loadAsString("/coupons/application/excludeCoupon.json"), Coupon.class
         );
 
         CouponEngine couponEngine = new CouponEngine();
 
-        assertFalse(couponEngine.evaluate(testCart, testCoupon));
+        assertFalse(couponEngine.evaluate(testCart, testCoupon.getApplicationRules()));
     }
 
     public void testMinimumCartValueRule() throws IOException {
@@ -53,12 +53,12 @@ public class RulesTest extends TestCase {
 
         Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
         Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/minimumCartValueCoupon.json"), Coupon.class
+            FixtureLoader.loadAsString("/coupons/validation/minimumCartValueCoupon.json"), Coupon.class
         );
 
         CouponEngine couponEngine = new CouponEngine();
 
-        assertTrue(couponEngine.evaluate(testCart, testCoupon));
+        assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
     }
 
     public void testExpirationRule() throws IOException {
@@ -66,12 +66,12 @@ public class RulesTest extends TestCase {
 
         Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
         Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/expirationCoupon.json"), Coupon.class
+            FixtureLoader.loadAsString("/coupons/validation/expirationCoupon.json"), Coupon.class
         );
 
         CouponEngine couponEngine = new CouponEngine();
 
-        assertFalse(couponEngine.evaluate(testCart, testCoupon));
+        assertFalse(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
     }
 
     public void testValidCodeRule() throws IOException {
@@ -79,11 +79,11 @@ public class RulesTest extends TestCase {
 
         Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
         Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/validCodeCoupon.json"), Coupon.class
+            FixtureLoader.loadAsString("/coupons/validation/validCodeCoupon.json"), Coupon.class
         );
 
         CouponEngine couponEngine = new CouponEngine();
 
-        assertTrue(couponEngine.evaluate(testCart, testCoupon));
+        assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
     }
 }

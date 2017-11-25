@@ -1,9 +1,6 @@
 package de.delinero.copt.engines;
 
-import de.delinero.copt.models.Cart;
-import de.delinero.copt.models.Coupon;
-import de.delinero.copt.models.CouponRule;
-import de.delinero.copt.models.EvaluatedResult;
+import de.delinero.copt.models.*;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.api.RulesEngine;
@@ -27,42 +24,42 @@ public class CouponEngine {
         this.expressionEngine = new CouponExpressionEngine(new SpelExpressionParser());
     }
 
-    public Boolean evaluate(Cart cart, Coupon coupon) {
-        Rules rulesSet = new Rules();
-        registerRules(rulesSet, coupon.getRules());
+    public Boolean evaluate(Cart cart, CouponRuleSet ruleSet) {
+        Rules rules = new Rules();
+        registerRules(rules, ruleSet.getRules());
 
-        List<EvaluatedResult> results = initializeResults(rulesSet);
-        Facts facts = establishFacts(cart, coupon, results);
+        List<EvaluatedResult> results = initializeResults(rules);
+        Facts facts = establishFacts(cart, ruleSet, results);
 
-        rulesEngine.fire(rulesSet, facts);
+        rulesEngine.fire(rules, facts);
 
-        return expressionEngine.parse(coupon.getExpression(), results);
+        return expressionEngine.parse(ruleSet.getExpression(), results);
     }
 
-    private Facts establishFacts(Cart cart, Coupon coupon, List<EvaluatedResult> results) {
+    private Facts establishFacts(Cart cart, CouponRuleSet ruleSet, List<EvaluatedResult> results) {
         Facts facts = new Facts();
 
         facts.put("cart", cart);
-        facts.put("coupon", coupon);
+        facts.put("ruleSet", ruleSet);
         facts.put("results", results);
 
         return facts;
     }
 
-    private void registerRules(Rules rulesSet, List<CouponRule> couponRules) {
+    private void registerRules(Rules rules, List<CouponRule> couponRules) {
         for (CouponRule rule : couponRules) {
             try {
                 Class<?> ruleClass = Class.forName(String.format("de.delinero.copt.rules.%s", rule.getRuleName()));
-                rulesSet.register(ruleClass.newInstance());
+                rules.register(ruleClass.newInstance());
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException exception) {
                 break;
             }
         }
     }
 
-    private List<EvaluatedResult> initializeResults(Rules rulesSet) {
+    private List<EvaluatedResult> initializeResults(Rules rules) {
         List<EvaluatedResult> results = new ArrayList<>();
-        rulesSet.forEach((rule -> results.add(new EvaluatedResult(rule.getName(), false))) );
+        rules.forEach((rule -> results.add(new EvaluatedResult(rule.getName(), false))) );
 
         return results;
     }

@@ -4,7 +4,7 @@
     <groupId>de.delinero.copt</groupId>
     <artifactId>coupon-prototype</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>coupon-prototype</name>
     <url>http://maven.apache.org</url>
     <properties>

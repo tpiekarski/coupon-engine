@@ -1,0 +1,16 @@
+{
+  "value": 100,
+  "code": "XYZ",
+  "items": [
+    {
+      "sku": "E1000-001",
+      "category": "Cheese",
+      "price": 50
+    },
+    {
+      "sku": "E1000-010",
+      "category": "Cheese",
+      "price": 50
+    }
+  ]
+}
