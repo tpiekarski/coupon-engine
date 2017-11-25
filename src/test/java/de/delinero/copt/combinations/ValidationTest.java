@@ -2,6 +2,8 @@ package de.delinero.copt.combinations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
+import de.delinero.copt.builders.CartBuilder;
+import de.delinero.copt.builders.CouponBuilder;
 import de.delinero.copt.engines.CouponEngine;
 import de.delinero.copt.models.Scope;
 import de.delinero.copt.utils.CouponRuleBuilder;
@@ -20,20 +22,22 @@ import static org.junit.Assert.assertFalse;
 public class ValidationTest {
 
     private ObjectMapper objectMapper;
+    private CartBuilder cartBuilder;
+    private CouponBuilder couponBuilder;
     private CouponEngine couponEngine;
 
     @Before
     public void setUp() {
         objectMapper = new ObjectMapper();
+        cartBuilder = new CartBuilder(objectMapper);
+        couponBuilder = new CouponBuilder(objectMapper);
         couponEngine = new CouponEngine();
     }
 
     @Test
     public void testANDValidationRulesCombination() throws IOException {
-        Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
-        Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
-        );
+        Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
+        Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
         List<String> testRulesFixtures = ImmutableList.of("MinimumCartValue", "Expiration", "ValidCode");
         testCoupon.getValidationRules().setExpression(
@@ -49,10 +53,8 @@ public class ValidationTest {
 
     @Test
     public void testORValidationCombination() throws IOException {
-        Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
-        Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
-        );
+        Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
+        Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
         List<String> testRulesFixtures = ImmutableList.of("ValidCode", "MinimumCartValue");
         testCoupon.getValidationRules().setExpression("#ValidCode or #MinimumCartValue");
@@ -66,10 +68,8 @@ public class ValidationTest {
 
     @Test
     public void testANDandORValidationRulesCombination() throws IOException {
-        Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
-        Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
-        );
+        Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
+        Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
         List<String> testRulesFixtures = ImmutableList.of("ValidCode", "Expiration", "MinimumCartValue");
         testCoupon.getValidationRules().setExpression("#ValidCode and #Expiration or #MinimumCartValue");
@@ -83,10 +83,8 @@ public class ValidationTest {
 
     @Test
     public void testANDandNOTValidationRulesCombination() throws IOException {
-        Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
-        Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
-        );
+        Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
+        Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
         List<String> testRulesFixtures = ImmutableList.of("ValidCode", "MinimumCartValue");
         testCoupon.getValidationRules().setExpression("#ValidCode and not #MinimumCartValue");

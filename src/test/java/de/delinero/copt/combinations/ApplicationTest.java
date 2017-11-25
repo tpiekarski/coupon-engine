@@ -2,6 +2,8 @@ package de.delinero.copt.combinations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
+import de.delinero.copt.builders.CartBuilder;
+import de.delinero.copt.builders.CouponBuilder;
 import de.delinero.copt.engines.CouponEngine;
 import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.Coupon;
@@ -20,20 +22,22 @@ import static org.junit.Assert.assertTrue;
 public class ApplicationTest {
 
     private ObjectMapper objectMapper;
+    private CartBuilder cartBuilder;
+    private CouponBuilder couponBuilder;
     private CouponEngine couponEngine;
 
     @Before
     public void setUp() {
         objectMapper = new ObjectMapper();
+        cartBuilder = new CartBuilder(objectMapper);
+        couponBuilder = new CouponBuilder(objectMapper);
         couponEngine = new CouponEngine();
     }
 
     @Test
     public void testANDApplicationRulesCombination() throws IOException {
-        Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
-        Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
-        );
+        Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
+        Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
         List<String> testRulesFixtures = ImmutableList.of("Category", "Exclude");
         testCoupon.getApplicationRules().setExpression("#Category and #Exclude");
@@ -47,10 +51,8 @@ public class ApplicationTest {
 
     @Test
     public void testORApplicationCombination() throws IOException {
-        Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
-        Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
-        );
+        Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
+        Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
         List<String> testRulesFixtures = ImmutableList.of("Category", "Exclude");
         testCoupon.getApplicationRules().setExpression("#Category or #Exclude");
@@ -64,10 +66,8 @@ public class ApplicationTest {
 
     @Test
     public void testANDandNOTApplicationRulesCombination() throws IOException {
-        Cart testCart = objectMapper.readValue(FixtureLoader.loadAsString("/carts/cart.json"), Cart.class);
-        Coupon testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
-        );
+        Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
+        Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
         List<String> testRulesFixtures = ImmutableList.of("Category", "Exclude");
         testCoupon.getApplicationRules().setExpression("#Category and not #Exclude");

@@ -1,6 +1,8 @@
 package de.delinero.copt.combinations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.delinero.copt.builders.CartBuilder;
+import de.delinero.copt.builders.CouponBuilder;
 import de.delinero.copt.engines.CouponEngine;
 import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.Coupon;
@@ -15,26 +17,24 @@ import static org.junit.Assert.assertFalse;
 
 public class CombinationTest {
 
-    private ObjectMapper objectMapper;
+    private CartBuilder cartBuilder;
     private CouponEngine couponEngine;
 
     private Coupon testCoupon;
-
+    
     @Before
-    public void setUp() throws IOException {
-        objectMapper = new ObjectMapper();
+    public void setUp() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        cartBuilder = new CartBuilder(objectMapper);
         couponEngine = new CouponEngine();
 
-        testCoupon = objectMapper.readValue(
-            FixtureLoader.loadAsString("/combination/coupon.json"), Coupon.class
-        );
+        CouponBuilder couponBuilder = new CouponBuilder(objectMapper);
+        testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/combination/coupon.json"));
     }
-
+    
     @Test
     public void testCombinationOfValidAndApplicable() throws IOException {
-        Cart testCart = objectMapper.readValue(
-            FixtureLoader.loadAsString("/combination/valid-applicable/cart.json"), Cart.class
-        );
+        Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/combination/valid-applicable/cart.json"));
 
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getApplicationRules()));
@@ -42,9 +42,7 @@ public class CombinationTest {
 
     @Test
     public void testCombinationOfInvalidButApplicable() throws IOException {
-        Cart testCart = objectMapper.readValue(
-            FixtureLoader.loadAsString("/combination/invalid-applicable/cart.json"), Cart.class
-        );
+        Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/combination/invalid-applicable/cart.json"));
 
         assertFalse(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getApplicationRules()));
@@ -52,9 +50,7 @@ public class CombinationTest {
 
     @Test
     public void testCombinationOfValidButNotApplicable() throws IOException {
-        Cart testCart = objectMapper.readValue(
-            FixtureLoader.loadAsString("/combination/valid-not-applicable/cart.json"), Cart.class
-        );
+        Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/combination/valid-not-applicable/cart.json"));
 
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
         assertFalse(couponEngine.evaluate(testCart, testCoupon.getApplicationRules()));
@@ -62,9 +58,7 @@ public class CombinationTest {
 
     @Test
     public void testCombinationOfInvalidAndNotApplicable() throws IOException {
-        Cart testCart = objectMapper.readValue(
-            FixtureLoader.loadAsString("/combination/invalid-not-applicable/cart.json"), Cart.class
-        );
+        Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/combination/invalid-not-applicable/cart.json"));
 
         assertFalse(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
         assertFalse(couponEngine.evaluate(testCart, testCoupon.getApplicationRules()));
