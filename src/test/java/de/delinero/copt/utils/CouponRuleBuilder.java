@@ -38,11 +38,11 @@ public class CouponRuleBuilder {
     public static void buildCouponRules(
         ObjectMapper objectMapper, Coupon testCoupon, List<String> testRulesFixtures
     ) {
-        for (Integer n = 0; n < testRulesFixtures.size(); n++) {
+        for (String testRulesFixture : testRulesFixtures) {
             try {
 
                 testCoupon.getValidationRules().addRule(objectMapper.readValue(FixtureLoader.loadAsString(
-                    String.format("/rules/%s.json", testRulesFixtures.get(n))), CouponRule.class
+                    String.format("/rules/%s.json", testRulesFixture)), CouponRule.class
                 ));
 
             } catch (IOException exception) {

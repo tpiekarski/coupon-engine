@@ -1,6 +1,5 @@
 package de.delinero.copt.rules;
 
-import de.delinero.copt.models.Coupon;
 import de.delinero.copt.models.CouponRule;
 import de.delinero.copt.models.CouponRuleSet;
 import org.jeasy.rules.api.Facts;

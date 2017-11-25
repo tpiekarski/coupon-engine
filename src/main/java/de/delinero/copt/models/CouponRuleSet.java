@@ -9,7 +9,7 @@ import java.util.Optional;
 public class CouponRuleSet {
 
     @JsonProperty("rules")
-    private List<CouponRule> rules;
+    private final List<CouponRule> rules;
 
     @JsonProperty("expression")
     private String expression;
