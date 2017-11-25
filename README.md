@@ -3,20 +3,40 @@ CLI prototype for a coupon engine
 A CLI prototype for evaluation coupon rules driven by [Easy Rules](https://github.com/j-easy/easy-rules)
 and [Spring Expression Language](https://docs.spring.io/spring/docs/4.3.12.RELEASE/spring-framework-reference/html/expressions.html). 
 
+### Introduction
+This prototype leverages Easy Rules and Spring Expression language for evaluation of coupon rules defined
+in JSON files with an easy and expressive way of defining multiple rules. A set of n rules and their options,
+like a coupon code, a category of products or a minimum cart value are evaluated based upon a cart defined
+in another JSON file.
+
+#### Prototyped Rules
+Rule|Option|Description
+---|---|---
+Category|Name of category|Rule for evaluating if products are from one category
+Exclude|Product SKU|Rule to exclude a product SKU
+Expiration|Date (YYYY-mm-dd, i.e. 2018-01-01)|Rule for an expiration date
+MinimumCartValue|Minimum Amount (Integer-based price)|Rule for a minimum cart value
+ValidCode|String containing a coupon code|Rule for evaluation valid coupon codes
+
 ### Build
 ```
 mvn package
 ```
 
 ### Usage
+#### General system-independent usage 
 ```
 java -jar target/coupon-prototype-0.0.1-shaded.jar examples/cart.json examples/coupons/coupon-5.json ABC
 ```
 
-or using shortcut shell script for launching coupon engine
-
+#### U*NIX-based systems launcher
 ```
 ./coupon-cli.sh examples/cart.json examples/coupons/coupon-5.json ABC
+```
+
+#### Windows-based systems launcher
+```
+./coupon-cli.bat examples/cart.json examples/coupons/coupon-5.json ABC
 ```
 
 ### CLI & Parameters
