@@ -3,6 +3,7 @@ package de.delinero.copt.combinations;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import de.delinero.copt.engines.CouponEngine;
+import de.delinero.copt.models.Scope;
 import de.delinero.copt.utils.CouponRuleBuilder;
 import de.delinero.copt.utils.FixtureLoader;
 import de.delinero.copt.models.Cart;
@@ -16,7 +17,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-public class ValidationCombinationTest {
+public class ValidationTest {
 
     private ObjectMapper objectMapper;
     private CouponEngine couponEngine;
@@ -34,11 +35,14 @@ public class ValidationCombinationTest {
             FixtureLoader.loadAsString("/coupons/emptyCoupon.json"), Coupon.class
         );
 
-        List<String> testRulesFixtures = ImmutableList.of(
-            "MinimumCartValue", "Expiration", "ValidCode"
+        List<String> testRulesFixtures = ImmutableList.of("MinimumCartValue", "Expiration", "ValidCode");
+        testCoupon.getValidationRules().setExpression(
+            "#MinimumCartValue and #Expiration and #ValidCode"
         );
 
-        CouponRuleBuilder.buildCouponRulesAndExpression(objectMapper, testCoupon, testRulesFixtures);
+        CouponRuleBuilder.buildCouponRulesAndExpression(
+            objectMapper, testCoupon, testRulesFixtures, Scope.VALIDATION
+        );
 
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
     }
@@ -53,7 +57,9 @@ public class ValidationCombinationTest {
         List<String> testRulesFixtures = ImmutableList.of("ValidCode", "MinimumCartValue");
         testCoupon.getValidationRules().setExpression("#ValidCode or #MinimumCartValue");
 
-        CouponRuleBuilder.buildCouponRules(objectMapper, testCoupon, testRulesFixtures);
+        CouponRuleBuilder.buildCouponRules(
+            objectMapper, testCoupon, testRulesFixtures, Scope.VALIDATION
+        );
 
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
     }
@@ -68,7 +74,9 @@ public class ValidationCombinationTest {
         List<String> testRulesFixtures = ImmutableList.of("ValidCode", "Expiration", "MinimumCartValue");
         testCoupon.getValidationRules().setExpression("#ValidCode and #Expiration or #MinimumCartValue");
 
-        CouponRuleBuilder.buildCouponRules(objectMapper, testCoupon, testRulesFixtures);
+        CouponRuleBuilder.buildCouponRules(
+            objectMapper, testCoupon, testRulesFixtures, Scope.VALIDATION
+        );
 
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
     }
@@ -83,7 +91,9 @@ public class ValidationCombinationTest {
         List<String> testRulesFixtures = ImmutableList.of("ValidCode", "MinimumCartValue");
         testCoupon.getValidationRules().setExpression("#ValidCode and not #MinimumCartValue");
 
-        CouponRuleBuilder.buildCouponRules(objectMapper, testCoupon, testRulesFixtures);
+        CouponRuleBuilder.buildCouponRules(
+            objectMapper, testCoupon, testRulesFixtures, Scope.VALIDATION
+        );
 
         assertFalse(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
     }
