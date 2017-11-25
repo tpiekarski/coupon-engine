@@ -27,24 +27,23 @@ public class CouponEngine {
         this.expressionEngine = new CouponExpressionEngine(new SpelExpressionParser());
     }
 
-    public Boolean evaluate(Cart cart, Coupon coupon, String code) {
+    public Boolean evaluate(Cart cart, Coupon coupon) {
         Rules rulesSet = new Rules();
         registerRules(rulesSet, coupon.getRules());
 
         List<EvaluatedResult> results = initializeResults(rulesSet);
-        Facts facts = establishFacts(cart, coupon, code, results);
+        Facts facts = establishFacts(cart, coupon, results);
 
         rulesEngine.fire(rulesSet, facts);
 
         return expressionEngine.parse(coupon.getExpression(), results);
     }
 
-    private Facts establishFacts(Cart cart, Coupon coupon, String code, List<EvaluatedResult> results) {
+    private Facts establishFacts(Cart cart, Coupon coupon, List<EvaluatedResult> results) {
         Facts facts = new Facts();
 
         facts.put("cart", cart);
         facts.put("coupon", coupon);
-        facts.put("code", code);
         facts.put("results", results);
 
         return facts;

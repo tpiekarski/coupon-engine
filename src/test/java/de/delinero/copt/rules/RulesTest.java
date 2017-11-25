@@ -32,7 +32,7 @@ public class RulesTest extends TestCase {
 
         CouponEngine couponEngine = new CouponEngine();
 
-        assertTrue(couponEngine.evaluate(testCart, testCoupon, "ABC"));
+        assertTrue(couponEngine.evaluate(testCart, testCoupon));
     }
 
     public void testExcludeRule() throws IOException {
@@ -45,7 +45,7 @@ public class RulesTest extends TestCase {
 
         CouponEngine couponEngine = new CouponEngine();
 
-        assertFalse(couponEngine.evaluate(testCart, testCoupon, "ABC"));
+        assertFalse(couponEngine.evaluate(testCart, testCoupon));
     }
 
     public void testMinimumCartValueRule() throws IOException {
@@ -58,7 +58,7 @@ public class RulesTest extends TestCase {
 
         CouponEngine couponEngine = new CouponEngine();
 
-        assertTrue(couponEngine.evaluate(testCart, testCoupon, "ABC"));
+        assertTrue(couponEngine.evaluate(testCart, testCoupon));
     }
 
     public void testExpirationRule() throws IOException {
@@ -71,7 +71,7 @@ public class RulesTest extends TestCase {
 
         CouponEngine couponEngine = new CouponEngine();
 
-        assertFalse(couponEngine.evaluate(testCart, testCoupon, "ABC"));
+        assertFalse(couponEngine.evaluate(testCart, testCoupon));
     }
 
     public void testValidCodeRule() throws IOException {
@@ -84,6 +84,6 @@ public class RulesTest extends TestCase {
 
         CouponEngine couponEngine = new CouponEngine();
 
-        assertTrue(couponEngine.evaluate(testCart, testCoupon, "ABC"));
+        assertTrue(couponEngine.evaluate(testCart, testCoupon));
     }
 }

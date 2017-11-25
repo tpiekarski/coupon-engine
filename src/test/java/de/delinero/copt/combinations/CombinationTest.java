@@ -41,7 +41,7 @@ public class CombinationTest extends TestCase {
         CouponRuleBuilder.buildCouponRulesAndExpression(objectMapper, testCoupon, testRulesFixtures);
         CouponEngine couponEngine = new CouponEngine();
 
-        assertTrue(couponEngine.evaluate(testCart, testCoupon, "ABC"));
+        assertTrue(couponEngine.evaluate(testCart, testCoupon));
     }
 
     public void testORCombination() throws IOException {
@@ -58,7 +58,7 @@ public class CombinationTest extends TestCase {
         CouponRuleBuilder.buildCouponRules(objectMapper, testCoupon, testRulesFixtures);
         CouponEngine couponEngine = new CouponEngine();
 
-        assertTrue(couponEngine.evaluate(testCart, testCoupon, "ABC"));
+        assertTrue(couponEngine.evaluate(testCart, testCoupon));
     }
 
     public void testANDandORCombination() throws IOException {
@@ -75,7 +75,7 @@ public class CombinationTest extends TestCase {
         CouponRuleBuilder.buildCouponRules(objectMapper, testCoupon, testRulesFixtures);
         CouponEngine couponEngine = new CouponEngine();
 
-        assertTrue(couponEngine.evaluate(testCart, testCoupon, "ABC"));
+        assertTrue(couponEngine.evaluate(testCart, testCoupon));
     }
 
     public void testANDandNOTCombination() throws IOException {
@@ -92,7 +92,7 @@ public class CombinationTest extends TestCase {
         CouponRuleBuilder.buildCouponRules(objectMapper, testCoupon, testRulesFixtures);
         CouponEngine couponEngine = new CouponEngine();
 
-        assertFalse(couponEngine.evaluate(testCart, testCoupon, "ABC"));
+        assertFalse(couponEngine.evaluate(testCart, testCoupon));
     }
 
 }

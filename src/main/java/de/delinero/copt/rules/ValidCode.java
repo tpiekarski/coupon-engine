@@ -1,5 +1,6 @@
 package de.delinero.copt.rules;
 
+import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.Coupon;
 import de.delinero.copt.models.CouponRule;
 import org.jeasy.rules.api.Facts;
@@ -14,12 +15,13 @@ public class ValidCode extends AbstractCouponRule {
 
     @Override
     public boolean evaluate(Facts facts) {
+        Cart cart = (Cart) facts.get("cart");
         Coupon coupon = (Coupon) facts.get("coupon");
         String code = (String) facts.get("code");
 
         Optional<CouponRule> rule = coupon.getRuleByName(this.name);
 
-        return rule.isPresent() && rule.get().getOption().equals(code);
+        return rule.isPresent() && rule.get().getOption().equals(cart.getCode());
     }
 
 }

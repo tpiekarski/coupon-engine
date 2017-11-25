@@ -9,11 +9,18 @@ public class Cart {
     @JsonProperty("value")
     private Integer value;
 
+    @JsonProperty("code")
+    private String code;
+
     @JsonProperty("items")
     private List<CartItem> items;
 
     public Integer getValue() {
         return value;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public List<CartItem> getItems() {

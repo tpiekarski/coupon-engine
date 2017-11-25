@@ -22,7 +22,7 @@ public class App {
         if (! checkArguments(args)) {
             System.out.printf(
                 "Usage: java -cp <classpath> de.delinero.copt.App " +
-                "<cart.json> <coupon.json> <coupon code> [<silent>]%n"
+                "<cart.json> <coupon.json> [<silent>]%n"
             );
             return;
         }
@@ -36,7 +36,7 @@ public class App {
         Cart cart = cartBuilder.build(getPayloadFile(args[0]));
         Coupon coupon = couponBuilder.build(getPayloadFile(args[1]));
 
-        Boolean result = couponEngine.evaluate(cart, coupon, args[2]);
+        Boolean result = couponEngine.evaluate(cart, coupon);
 
         System.out.printf("%nThe result of the coupon evaluation is %s.%n", result);
     }
@@ -50,10 +50,10 @@ public class App {
     }
 
     private static Boolean checkArguments(String[] args) {
-        if (args.length == 3) {
+        if (args.length == 2) {
             silent = true;
-        } else if (args.length == 4) {
-            silent = Boolean.valueOf(args[3]);
+        } else if (args.length == 3) {
+            silent = Boolean.valueOf(args[2]);
         } else {
             return false;
         }
