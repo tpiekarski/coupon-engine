@@ -1,9 +1,14 @@
-CLI prototype for a coupon engine
+Coupon Engine Prototype
 ---
-A CLI prototype for evaluation coupon rules driven by [Easy Rules](https://github.com/j-easy/easy-rules)
-and [Spring Expression Language](https://docs.spring.io/spring/docs/4.3.12.RELEASE/spring-framework-reference/html/expressions.html). 
+[![Build Status](https://travis-ci.org/tpiekarski/coupon-engine.svg?branch=master)](https://travis-ci.org/tpiekarski/coupon-engine) 
+[![Coverage Status](https://coveralls.io/repos/github/tpiekarski/coupon-engine/badge.svg?branch=master)](https://coveralls.io/github/tpiekarski/coupon-engine?branch=master)
+
 
 ### Introduction
+*A prototype for evaluating coupon rules driven by [Easy Rules](https://github.com/j-easy/easy-rules)
+and [Spring Expression Language](https://docs.spring.io/spring/docs/4.3.12.RELEASE/spring-framework-reference/html/expressions.html)
+providing a simple CLI for testing and developing.*
+
 This prototype leverages Easy Rules and Spring Expression language for evaluation of coupon rules defined
 in JSON files with an easy and expressive way of defining multiple rules. A set of n rules and their options,
 like a coupon code, a category of products or a minimum cart value are evaluated based upon a cart defined
