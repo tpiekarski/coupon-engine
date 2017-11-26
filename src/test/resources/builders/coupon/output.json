@@ -1,0 +1,1 @@
+{"type":"percentage","discount":20,"validation":{"rules":[{"ruleName":"ValidCode","rule":"ValidCode","option":"ABC"}],"expression":"#ValidCode"},"application":{"rules":[{"ruleName":"Category","rule":"Category","option":"Cheese"}],"expression":"#Category"}}

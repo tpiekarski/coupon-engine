@@ -41,7 +41,7 @@ public class App {
         Boolean validationResult = couponEngine.evaluate(cart, coupon.getValidationRules());
         Boolean applicationResult = couponEngine.evaluate(cart, coupon.getApplicationRules());
 
-        System.out.printf(Message.getMessageByResults(validationResult, applicationResult));
+        System.out.printf(String.format("%s%n", Message.getMessageByResults(validationResult, applicationResult)));
     }
 
     private static String getPayloadFile(String filename) {

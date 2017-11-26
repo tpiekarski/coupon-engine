@@ -1,6 +1,7 @@
 package de.delinero.copt.builders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.delinero.copt.exceptions.DeserializationException;
 import de.delinero.copt.models.Coupon;
 
 import javax.inject.Inject;
@@ -19,7 +20,7 @@ public class CouponBuilder {
         try {
             return objectMapper.readValue(cart, Coupon.class);
         } catch (IOException exception) {
-            throw new RuntimeException(exception);
+            throw new DeserializationException(exception);
         }
     }
 
