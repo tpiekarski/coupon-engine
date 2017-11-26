@@ -17,14 +17,13 @@ import java.nio.file.Paths;
 
 public class App {
 
+    private static String cartFilename;
+    private static String couponFilename;
     private static Boolean silent;
 
     public static void main(String[] args) {
-        if (! checkArguments(args)) {
-            System.out.printf(
-                "Usage: java -cp <classpath> de.delinero.copt.App " +
-                "<cart.json> <coupon.json> [<silent>]%n"
-            );
+        if (! parseArguments(args)) {
+            System.out.printf("Usage: java -cp <classpath> de.delinero.copt.App cart.json coupon.json [silent]%n");
 
             return;
         }
@@ -35,8 +34,8 @@ public class App {
         CouponBuilder couponBuilder = injector.getInstance(CouponBuilder.class);
         CouponEngine couponEngine = new CouponEngine(silent);
 
-        Cart cart = cartBuilder.build(getPayloadFile(args[0]));
-        Coupon coupon = couponBuilder.build(getPayloadFile(args[1]));
+        Cart cart = cartBuilder.build(getPayloadFile(cartFilename));
+        Coupon coupon = couponBuilder.build(getPayloadFile(couponFilename));
 
         Boolean validationResult = couponEngine.evaluate(cart, coupon.getValidationRules());
         Boolean applicationResult = couponEngine.evaluate(cart, coupon.getApplicationRules());
@@ -52,10 +51,15 @@ public class App {
         }
     }
 
-    private static Boolean checkArguments(String[] args) {
+    private static Boolean parseArguments(String[] args) {
+
         if (args.length == 2) {
+            cartFilename = args[0];
+            couponFilename = args[1];
             silent = true;
         } else if (args.length == 3) {
+            cartFilename = args[0];
+            couponFilename = args[1];
             silent = Boolean.valueOf(args[2]);
         } else {
             return false;
