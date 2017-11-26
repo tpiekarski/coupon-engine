@@ -30,7 +30,7 @@ mvn package
 ### Usage
 #### General system-independent usage 
 ```
-java -jar target/coupon-prototype-0.0.2-shaded.jar examples/cart.json examples/coupon.json
+java -jar target/coupon-prototype-0.2.0-shaded.jar examples/cart.json examples/coupon.json
 ```
 
 #### U*NIX-based systems launcher
@@ -44,7 +44,7 @@ coupon-cli.bat examples/cart.json examples/coupon.json
 ```
 
 ### CLI & Parameters
-java -jar target/coupon-prototype-0.0.2-shaded.jar *cart* *coupon* *silent*
+java -jar target/coupon-prototype-0.2.0-shaded.jar *cart* *coupon* *silent*
 
 Parameter | Description
 --- | ---

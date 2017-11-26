@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION=0.0.2
+VERSION=0.2.0
 SHADED_JAR=coupon-prototype-${VERSION}-shaded.jar
 
 if [ -e target/${SHADED_JAR} ]; then
