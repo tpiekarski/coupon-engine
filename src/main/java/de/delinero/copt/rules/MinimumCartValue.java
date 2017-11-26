@@ -1,5 +1,6 @@
 package de.delinero.copt.rules;
 
+import de.delinero.copt.engines.CouponEngine;
 import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.CouponRule;
 import de.delinero.copt.models.CouponRuleSet;
@@ -15,8 +16,8 @@ public class MinimumCartValue extends AbstractCouponRule {
 
     @Override
     public boolean evaluate(Facts facts) {
-        CouponRuleSet ruleSet = (CouponRuleSet) facts.get("ruleSet");
-        Cart cart = (Cart) facts.get("cart");
+        CouponRuleSet ruleSet = (CouponRuleSet) facts.get(CouponEngine.RULE_SET);
+        Cart cart = (Cart) facts.get(CouponEngine.CART);
 
         Optional<CouponRule> rule = ruleSet.getRuleByName(this.name);
 

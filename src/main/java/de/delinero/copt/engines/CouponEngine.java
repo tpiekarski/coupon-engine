@@ -15,6 +15,12 @@ public class CouponEngine {
     private final RulesEngine rulesEngine;
     private final CouponExpressionEngine expressionEngine;
 
+    public static final String RULE_LOADING_TEMPLATE = "de.delinero.copt.rules.%s";
+
+    public static final String CART = "cart";
+    public static final String RULE_SET = "ruleSet";
+    public static final String RESULTS = "results";
+
     public CouponEngine() {
         this(true);
     }
@@ -39,9 +45,9 @@ public class CouponEngine {
     private Facts establishFacts(Cart cart, CouponRuleSet ruleSet, List<EvaluatedResult> results) {
         Facts facts = new Facts();
 
-        facts.put("cart", cart);
-        facts.put("ruleSet", ruleSet);
-        facts.put("results", results);
+        facts.put(CART, cart);
+        facts.put(RULE_SET, ruleSet);
+        facts.put(RESULTS, results);
 
         return facts;
     }
@@ -49,7 +55,7 @@ public class CouponEngine {
     private void registerRules(Rules rules, List<CouponRule> couponRules) {
         for (CouponRule rule : couponRules) {
             try {
-                Class<?> ruleClass = Class.forName(String.format("de.delinero.copt.rules.%s", rule.getRuleName()));
+                Class<?> ruleClass = Class.forName(String.format(RULE_LOADING_TEMPLATE, rule.getRuleName()));
                 rules.register(ruleClass.newInstance());
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException exception) {
                 break;

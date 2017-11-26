@@ -1,5 +1,6 @@
 package de.delinero.copt.rules;
 
+import de.delinero.copt.engines.CouponEngine;
 import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.CouponRule;
 import de.delinero.copt.models.CouponRuleSet;
@@ -15,8 +16,8 @@ public class ValidCode extends AbstractCouponRule {
 
     @Override
     public boolean evaluate(Facts facts) {
-        Cart cart = (Cart) facts.get("cart");
-        CouponRuleSet ruleSet = (CouponRuleSet) facts.get("ruleSet");
+        Cart cart = (Cart) facts.get(CouponEngine.CART);
+        CouponRuleSet ruleSet = (CouponRuleSet) facts.get(CouponEngine.RULE_SET);
 
         Optional<CouponRule> rule = ruleSet.getRuleByName(this.name);
 

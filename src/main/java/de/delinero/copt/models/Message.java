@@ -2,6 +2,10 @@ package de.delinero.copt.models;
 
 public class Message {
 
+    private Message() {
+        // Private constructor for static message storage class
+    }
+
     public static String getMessageByResults(Boolean validationResult, Boolean applicationResult) {
         String message = "Result: ";
 
@@ -15,7 +19,7 @@ public class Message {
             message += "The coupon is invalid and can not be applied to the cart.";
         }
 
-        message += String.format(" (Validation: %s, Application: %s)%n", validationResult, applicationResult);
+        message += String.format(" (Validation: %s, Application: %s)", validationResult, applicationResult);
 
         return message;
     }

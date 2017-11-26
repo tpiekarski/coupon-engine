@@ -1,5 +1,6 @@
 package de.delinero.copt.rules;
 
+import de.delinero.copt.engines.CouponEngine;
 import de.delinero.copt.models.CouponRule;
 import de.delinero.copt.models.CouponRuleSet;
 import org.jeasy.rules.api.Facts;
@@ -19,7 +20,7 @@ public class Expiration extends AbstractCouponRule {
 
     @Override
     public boolean evaluate(Facts facts) {
-        CouponRuleSet ruleSet = (CouponRuleSet) facts.get("ruleSet");
+        CouponRuleSet ruleSet = (CouponRuleSet) facts.get(CouponEngine.RULE_SET);
 
         Optional<CouponRule> rule = ruleSet.getRuleByName(this.name);
 
