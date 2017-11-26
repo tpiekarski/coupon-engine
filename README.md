@@ -44,7 +44,7 @@ coupon-cli.bat examples/cart.json examples/coupon.json
 ```
 
 ### CLI & Parameters
-java -jar target/coupon-prototype-1.0-SNAPSHOT-shaded.jar *cart* *coupon* *[silent]*
+java -jar target/coupon-prototype-0.0.2-shaded.jar *cart* *coupon* *silent*
 
 Parameter | Description
 --- | ---

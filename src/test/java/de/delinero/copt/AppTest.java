@@ -1,8 +1,11 @@
 package de.delinero.copt;
 
+import de.delinero.copt.exceptions.PayloadFileException;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -13,6 +16,8 @@ public class AppTest {
 
     private ByteArrayOutputStream outputStream;
 
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Before
     public void setUp() {
@@ -28,7 +33,7 @@ public class AppTest {
 
 
     @Test
-    public void testApp() {
+    public void testAppOutput() {
         String[] args = {
             "src/test/resources/builders/cart.json",
             "src/test/resources/builders/coupon/input.json",
@@ -42,6 +47,26 @@ public class AppTest {
             stripNewline(outputStream.toString())
         );
 
+    }
+
+    @Test
+    public void testAppUsageOutput() {
+        String[] args = { "anything" };
+
+        App.main(args);
+
+        assertEquals(
+            "Usage: java -cp <classpath> de.delinero.copt.App cart.json coupon.json [silent]",
+            stripNewline(outputStream.toString())
+        );
+    }
+
+    @Test
+    public void testAppIsThrowingPayloadFileException() {
+        String[] args = { "nowhere-to-be-found.json", "hidden-in-plain-sight.json" };
+
+        exception.expect(PayloadFileException.class);
+        App.main(args);
     }
 
     private String stripNewline(String input) {

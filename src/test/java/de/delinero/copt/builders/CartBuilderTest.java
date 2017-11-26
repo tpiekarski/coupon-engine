@@ -10,6 +10,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.io.OutputStream;
+
 import static org.junit.Assert.assertEquals;
 
 public class CartBuilderTest {
