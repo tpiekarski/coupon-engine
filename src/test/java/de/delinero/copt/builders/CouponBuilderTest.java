@@ -18,7 +18,7 @@ public class CouponBuilderTest {
     private CouponBuilder couponBuilder;
 
     @Rule
-    public ExpectedException exception = ExpectedException.none();
+    public final ExpectedException exception = ExpectedException.none();
 
     @Before
     public void setUp() {
