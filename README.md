@@ -4,11 +4,19 @@ Coupon Engine Prototype
 [![Quality Gate Status](https://sonarcloud.io/api/badges/gate?key=de.delinero.copt:coupon-prototype)](https://sonarcloud.io/dashboard?id=de.delinero.copt%3Acoupon-prototype)
 [![Coverage Status](https://coveralls.io/repos/github/tpiekarski/coupon-engine/badge.svg?branch=master)](https://coveralls.io/github/tpiekarski/coupon-engine?branch=master)
 
-### Introduction
 *A prototype for evaluating coupon rules driven by [Easy Rules](https://github.com/j-easy/easy-rules)
 and [Spring Expression Language](https://docs.spring.io/spring/docs/4.3.12.RELEASE/spring-framework-reference/html/expressions.html)
 providing a simple CLI for testing and developing.*
 
+1. [Introduction](#introduction)
+2. [Prototyped Rules](#prototyped-rules)
+3. [Build](#build)
+4. [Dependencies](#dependencies)
+5. [Usage](#usage)
+6. [JSON Input Examples](#json-input-examples)
+
+
+### Introduction
 This prototype leverages Easy Rules and Spring Expression language for evaluation of coupon rules defined
 in JSON files with an easy and expressive way of defining multiple rules. A set of n rules and their options,
 like a coupon code, a category of products or a minimum cart value are evaluated based upon a cart defined
@@ -31,6 +39,20 @@ ValidCode|String containing a coupon code|Validation|Rule for evaluation valid c
 ```
 mvn package
 ```
+
+### Dependencies
+\# | Dependency | Version
+---|---|---
+1.| [Apache Commons IO](https://commons.apache.org/proper/commons-io/) | 2.6
+2.| [Apache Maven Shade Plugin](https://maven.apache.org/plugins/maven-shade-plugin/) | 3.1.0
+3.| [Maven Coveralls Plugin](https://github.com/trautonen/coveralls-maven-plugin) | 4.3.0
+4.| [Easy Rules Core](https://github.com/j-easy/easy-rules) | 3.0.0
+5.| [FasterXML Jackson Core](https://github.com/FasterXML/jackson-core) | 2.9.2
+6.| [Google Guice Inject](https://github.com/google/guice) | 4.1.0
+7.| [Jacoco](https://github.com/jacoco/jacoco) | 0.7.7.201606060606
+8.| [jUnit](https://github.com/junit-team/junit4) | 4.12
+9.| [Pitest](http://pitest.org/) | 1.2.4
+10.| [Spring Expression Language](https://docs.spring.io/spring/docs/4.3.12.RELEASE/spring-framework-reference/html/expressions.html) | 5.0.1
 
 ### Usage
 #### General system-independent usage 
@@ -57,7 +79,7 @@ cart | JSON file defining a cart
 coupon | JSON file defining a coupon
 silent | Optional boolean for silencing easy rules (default is true)
 
-### JSON Input Files
+### JSON Input Examples
 #### Carts
 ```json
 {

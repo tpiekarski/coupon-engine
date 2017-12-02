@@ -12,13 +12,26 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <apache.commons.io.version>2.6</apache.commons.io.version>
+        <apache.maven.shade.mainClass>de.delinero.copt.App</apache.maven.shade.mainClass>
+        <apache.maven.shade.version>3.1.0</apache.maven.shade.version>
+        <coveralls.plugin.version>4.3.0</coveralls.plugin.version>
+        <easyrules.core.version>3.0.0</easyrules.core.version>
+        <fasterxml.jackson.core.version>2.9.2</fasterxml.jackson.core.version>
+        <google.guice.inject.version>4.1.0</google.guice.inject.version>
+        <jacoco.version>0.7.7.201606060606</jacoco.version>
+        <junit.version>4.12</junit.version>
+        <pitest.target.classes>de.delinero.copt.*</pitest.target.classes>
+        <pitest.target.tests>${pitest.target.classes}</pitest.target.tests>
+        <pitest.version>1.2.4</pitest.version>
+        <spring.expression.version>5.0.1.RELEASE</spring.expression.version>
     </properties>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>${apache.maven.shade.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -29,7 +42,7 @@
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>de.delinero.copt.App</mainClass>
+                                    <mainClass>${apache.maven.shade.mainClass}</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -39,7 +52,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.7.201606060606</version>
+                <version>${jacoco.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -58,20 +71,20 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.2.4</version>
+                <version>${pitest.version}</version>
                 <configuration>
                     <targetClasses>
-                        <param>de.delinero.copt.*</param>
+                        <param>${pitest.target.classes}</param>
                     </targetClasses>
                     <targetTests>
-                        <param>de.delinero.copt.*</param>
+                        <param>${pitest.target.tests}</param>
                     </targetTests>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
-                <version>4.3.0</version>
+                <version>${coveralls.plugin.version}</version>
             </plugin>
         </plugins>
     </build>
@@ -82,31 +95,31 @@
             <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.6</version>
+            <version>${apache.commons.io.version}</version>
         </dependency>
         <dependency>
             <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.9.2</version>
+            <version>${fasterxml.jackson.core.version}</version>
         </dependency>
         <dependency>
             <!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
-            <version>4.1.0</version>
+            <version>${google.guice.inject.version}</version>
         </dependency>
         <dependency>
             <!-- https://mvnrepository.com/artifact/org.jeasy/easy-rules-core -->
             <groupId>org.jeasy</groupId>
             <artifactId>easy-rules-core</artifactId>
-            <version>3.0.0</version>
+            <version>${easyrules.core.version}</version>
         </dependency>
         <dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework/spring-expression -->
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
-            <version>5.0.1.RELEASE</version>
+            <version>${spring.expression.version}</version>
         </dependency>
 
         <!-- testing dependencies -->
@@ -114,14 +127,14 @@
             <!-- https://mvnrepository.com/artifact/junit/junit -->
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <!-- https://mvnrepository.com/artifact/org.pitest/pitest -->
             <groupId>org.pitest</groupId>
             <artifactId>pitest</artifactId>
-            <version>1.2.4</version>
+            <version>${pitest.version}</version>
         </dependency>
 
     </dependencies>
