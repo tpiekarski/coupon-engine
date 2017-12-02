@@ -26,7 +26,6 @@ public class AppTest {
         System.setOut(null);
     }
 
-
     @Test
     public void testAppOutput() {
         String[] args = {
@@ -63,6 +62,21 @@ public class AppTest {
 
         assertEquals(
             "Failed opening payload file nowhere-to-be-found.json, aborting.",
+            stripNewline(testStream.toString())
+        );
+    }
+
+    @Test
+    public void testAppUnknownRuleErrorOutput() {
+        String[] args = {
+            "--cart", "src/test/resources/builders/cart.json",
+            "--coupon", "src/test/resources/coupons/validation/unknownCoupon.json"
+        };
+
+        App.main(args);
+
+        assertEquals(
+            "The rule NewRule is unknown or not yet implemented, aborting.",
             stripNewline(testStream.toString())
         );
     }

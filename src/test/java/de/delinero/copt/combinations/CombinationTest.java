@@ -4,8 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.delinero.copt.builders.CartBuilder;
 import de.delinero.copt.builders.CouponBuilder;
 import de.delinero.copt.engines.CouponEngine;
-import de.delinero.copt.models.Cart;
-import de.delinero.copt.models.Coupon;
+import de.delinero.copt.exceptions.UnknownRuleException;
+import de.delinero.copt.models.carts.Cart;
+import de.delinero.copt.models.coupons.Coupon;
 import de.delinero.copt.utils.FixtureLoader;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class CombinationTest {
     }
     
     @Test
-    public void testCombinationOfValidAndApplicable() throws IOException {
+    public void testCombinationOfValidAndApplicable() throws IOException, UnknownRuleException {
         Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/combination/valid-applicable/cart.json"));
 
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
@@ -41,7 +42,7 @@ public class CombinationTest {
     }
 
     @Test
-    public void testCombinationOfInvalidButApplicable() throws IOException {
+    public void testCombinationOfInvalidButApplicable() throws IOException, UnknownRuleException {
         Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/combination/invalid-applicable/cart.json"));
 
         assertFalse(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
@@ -49,7 +50,7 @@ public class CombinationTest {
     }
 
     @Test
-    public void testCombinationOfValidButNotApplicable() throws IOException {
+    public void testCombinationOfValidButNotApplicable() throws IOException, UnknownRuleException {
         Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/combination/valid-not-applicable/cart.json"));
 
         assertTrue(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));
@@ -57,7 +58,7 @@ public class CombinationTest {
     }
 
     @Test
-    public void testCombinationOfInvalidAndNotApplicable() throws IOException {
+    public void testCombinationOfInvalidAndNotApplicable() throws IOException, UnknownRuleException {
         Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/combination/invalid-not-applicable/cart.json"));
 
         assertFalse(couponEngine.evaluate(testCart, testCoupon.getValidationRules()));

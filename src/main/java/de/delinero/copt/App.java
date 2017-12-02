@@ -6,10 +6,11 @@ import de.delinero.copt.builders.CartBuilder;
 import de.delinero.copt.builders.CouponBuilder;
 import de.delinero.copt.engines.CouponEngine;
 import de.delinero.copt.exceptions.InvalidArgumentsException;
+import de.delinero.copt.exceptions.UnknownRuleException;
 import de.delinero.copt.exceptions.PayloadFileException;
 import de.delinero.copt.models.Arguments;
-import de.delinero.copt.models.Cart;
-import de.delinero.copt.models.Coupon;
+import de.delinero.copt.models.carts.Cart;
+import de.delinero.copt.models.coupons.Coupon;
 import de.delinero.copt.models.Message;
 import de.delinero.copt.modules.CouponEngineModule;
 
@@ -41,6 +42,8 @@ public class App {
             System.out.printf("Usage: java -cp <classpath> de.delinero.copt.App [-v] -c cart.json -p coupon.json%n");
         } catch (PayloadFileException exception) {
             System.err.printf("Failed opening payload file %s, aborting.%n", exception.getFilename());
+        } catch (UnknownRuleException exception) {
+            System.err.printf("The rule %s is unknown or not yet implemented, aborting.%n", exception.getRuleName());
         }
     }
 

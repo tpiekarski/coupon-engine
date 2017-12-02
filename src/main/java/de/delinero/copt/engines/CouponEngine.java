@@ -1,6 +1,10 @@
 package de.delinero.copt.engines;
 
+import de.delinero.copt.exceptions.UnknownRuleException;
 import de.delinero.copt.models.*;
+import de.delinero.copt.models.carts.Cart;
+import de.delinero.copt.models.coupons.CouponRule;
+import de.delinero.copt.models.coupons.CouponRuleSet;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.api.RulesEngine;
@@ -30,7 +34,7 @@ public class CouponEngine {
         this.expressionEngine = new CouponExpressionEngine(new SpelExpressionParser());
     }
 
-    public Boolean evaluate(Cart cart, CouponRuleSet ruleSet) {
+    public Boolean evaluate(Cart cart, CouponRuleSet ruleSet) throws UnknownRuleException {
         Rules rules = new Rules();
         registerRules(rules, ruleSet.getRules());
 
@@ -52,13 +56,13 @@ public class CouponEngine {
         return facts;
     }
 
-    private void registerRules(Rules rules, List<CouponRule> couponRules) {
+    private void registerRules(Rules rules, List<CouponRule> couponRules) throws UnknownRuleException {
         for (CouponRule rule : couponRules) {
             try {
                 Class<?> ruleClass = Class.forName(String.format(RULE_LOADING_TEMPLATE, rule.getRuleName()));
                 rules.register(ruleClass.newInstance());
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException exception) {
-                break;
+                throw new UnknownRuleException(rule.getRuleName());
             }
         }
     }

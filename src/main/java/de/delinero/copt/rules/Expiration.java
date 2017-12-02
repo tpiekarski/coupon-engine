@@ -1,8 +1,8 @@
 package de.delinero.copt.rules;
 
 import de.delinero.copt.engines.CouponEngine;
-import de.delinero.copt.models.CouponRule;
-import de.delinero.copt.models.CouponRuleSet;
+import de.delinero.copt.models.coupons.CouponRule;
+import de.delinero.copt.models.coupons.CouponRuleSet;
 import org.jeasy.rules.api.Facts;
 
 import java.time.LocalDate;

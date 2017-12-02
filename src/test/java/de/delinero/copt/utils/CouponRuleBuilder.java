@@ -1,8 +1,8 @@
 package de.delinero.copt.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.delinero.copt.models.Coupon;
-import de.delinero.copt.models.CouponRule;
+import de.delinero.copt.models.coupons.Coupon;
+import de.delinero.copt.models.coupons.CouponRule;
 import de.delinero.copt.models.Scope;
 
 import java.io.IOException;

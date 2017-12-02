@@ -2,7 +2,7 @@ package de.delinero.copt.builders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.delinero.copt.exceptions.DeserializationException;
-import de.delinero.copt.models.Cart;
+import de.delinero.copt.models.carts.Cart;
 
 import javax.inject.Inject;
 import java.io.IOException;

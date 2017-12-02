@@ -1,0 +1,17 @@
+{
+  "discount": 20,
+  "type": "percentage",
+  "validation": {
+    "rules": [
+      {
+        "rule": "NewRule",
+        "option": "unknownOptions"
+      }
+    ],
+    "expression": "#NewRule"
+  },
+  "application": {
+    "rules": [],
+    "expression": ""
+  }
+}

@@ -5,8 +5,9 @@ import com.google.common.collect.ImmutableList;
 import de.delinero.copt.builders.CartBuilder;
 import de.delinero.copt.builders.CouponBuilder;
 import de.delinero.copt.engines.CouponEngine;
-import de.delinero.copt.models.Cart;
-import de.delinero.copt.models.Coupon;
+import de.delinero.copt.exceptions.UnknownRuleException;
+import de.delinero.copt.models.carts.Cart;
+import de.delinero.copt.models.coupons.Coupon;
 import de.delinero.copt.models.Scope;
 import de.delinero.copt.utils.CouponRuleBuilder;
 import de.delinero.copt.utils.FixtureLoader;
@@ -35,7 +36,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void testANDApplicationRulesCombination() throws IOException {
+    public void testANDApplicationRulesCombination() throws IOException, UnknownRuleException {
         Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
         Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
@@ -50,7 +51,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void testORApplicationCombination() throws IOException {
+    public void testORApplicationCombination() throws IOException, UnknownRuleException {
         Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
         Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
@@ -65,7 +66,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void testANDandNOTApplicationRulesCombination() throws IOException {
+    public void testANDandNOTApplicationRulesCombination() throws IOException, UnknownRuleException {
         Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
         Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 

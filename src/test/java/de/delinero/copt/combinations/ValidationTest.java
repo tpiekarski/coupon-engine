@@ -5,11 +5,12 @@ import com.google.common.collect.ImmutableList;
 import de.delinero.copt.builders.CartBuilder;
 import de.delinero.copt.builders.CouponBuilder;
 import de.delinero.copt.engines.CouponEngine;
+import de.delinero.copt.exceptions.UnknownRuleException;
 import de.delinero.copt.models.Scope;
 import de.delinero.copt.utils.CouponRuleBuilder;
 import de.delinero.copt.utils.FixtureLoader;
-import de.delinero.copt.models.Cart;
-import de.delinero.copt.models.Coupon;
+import de.delinero.copt.models.carts.Cart;
+import de.delinero.copt.models.coupons.Coupon;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,7 +36,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void testANDValidationRulesCombination() throws IOException {
+    public void testANDValidationRulesCombination() throws IOException, UnknownRuleException {
         Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
         Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
@@ -52,7 +53,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void testORValidationCombination() throws IOException {
+    public void testORValidationCombination() throws IOException, UnknownRuleException {
         Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
         Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
@@ -67,7 +68,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void testANDandORValidationRulesCombination() throws IOException {
+    public void testANDandORValidationRulesCombination() throws IOException, UnknownRuleException {
         Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
         Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 
@@ -82,7 +83,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void testANDandNOTValidationRulesCombination() throws IOException {
+    public void testANDandNOTValidationRulesCombination() throws IOException, UnknownRuleException {
         Cart testCart = cartBuilder.build(FixtureLoader.loadAsString("/carts/cart.json"));
         Coupon testCoupon = couponBuilder.build(FixtureLoader.loadAsString("/coupons/emptyCoupon.json"));
 

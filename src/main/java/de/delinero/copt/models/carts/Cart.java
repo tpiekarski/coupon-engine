@@ -1,4 +1,4 @@
-package de.delinero.copt.models;
+package de.delinero.copt.models.carts;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,6 +1,7 @@
-package de.delinero.copt.models;
+package de.delinero.copt.models.coupons;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import de.delinero.copt.models.Scope;
 
 public class Coupon {
 

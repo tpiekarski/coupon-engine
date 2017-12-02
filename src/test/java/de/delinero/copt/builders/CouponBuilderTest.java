@@ -3,7 +3,7 @@ package de.delinero.copt.builders;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.delinero.copt.exceptions.DeserializationException;
-import de.delinero.copt.models.Coupon;
+import de.delinero.copt.models.coupons.Coupon;
 import de.delinero.copt.utils.FixtureLoader;
 import org.junit.Before;
 import org.junit.Rule;
