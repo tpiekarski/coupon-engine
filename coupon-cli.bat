@@ -1,6 +1,6 @@
 @echo off
 
-set VERSION=0.2.1
+set VERSION=0.2.2
 set SHADED_JAR=coupon-prototype-%VERSION%-shaded.jar
 set ABS_PATH=%~dp0target\%SHADED_JAR%
 

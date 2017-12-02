@@ -35,9 +35,8 @@ public class AppTest {
     @Test
     public void testAppOutput() {
         String[] args = {
-            "src/test/resources/builders/cart.json",
-            "src/test/resources/builders/coupon/input.json",
-            "true"
+            "--cart", "src/test/resources/builders/cart.json",
+            "--coupon", "src/test/resources/builders/coupon/input.json"
         };
 
         App.main(args);
@@ -56,14 +55,14 @@ public class AppTest {
         App.main(args);
 
         assertEquals(
-            "Usage: java -cp <classpath> de.delinero.copt.App cart.json coupon.json [silent]",
+            "Usage: java -cp <classpath> de.delinero.copt.App [-v] -c cart.json -p coupon.json",
             stripNewline(outputStream.toString())
         );
     }
 
     @Test
     public void testAppIsThrowingPayloadFileException() {
-        String[] args = { "nowhere-to-be-found.json", "hidden-in-plain-sight.json" };
+        String[] args = { "--cart", "nowhere-to-be-found.json", "--coupon", "hidden-in-plain-sight.json" };
 
         exception.expect(PayloadFileException.class);
         App.main(args);

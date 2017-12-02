@@ -57,27 +57,27 @@ mvn package
 ### Usage
 #### General system-independent usage 
 ```
-java -jar target/coupon-prototype-0.2.1-shaded.jar examples/cart.json examples/coupon.json
+java -jar target/coupon-prototype-0.2.2-shaded.jar --cart examples/cart.json --coupon examples/coupon.json
 ```
 
 #### U*NIX-based systems launcher
 ```
-./coupon-cli.sh examples/cart.json examples/coupon.json
+./coupon-cli.sh --cart examples/cart.json --coupon examples/coupon.json
 ```
 
 #### Windows-based systems launcher
 ```
-coupon-cli.bat examples/cart.json examples/coupon.json
+coupon-cli.bat --cart examples/cart.json --coupon examples/coupon.json
 ```
 
 ### CLI & Parameters
-java -jar target/coupon-prototype-0.2.1-shaded.jar *cart* *coupon* *silent*
+java -jar target/coupon-prototype-0.2.2-shaded.jar *--verbose* --cart examples/cart.json --coupon examples/coupon.json
 
-Parameter | Description
---- | ---
-cart | JSON file defining a cart
-coupon | JSON file defining a coupon
-silent | Optional boolean for silencing easy rules (default is true)
+Parameter (Long) | Parameter (Short) | Parameter (Windows) | Input | Description
+--- | --- | --- | --- | ---
+--cart | -c | /C | <cart.json> | JSON file defining a cart
+--coupon | -p | /P | <coupon.json> | JSON file defining a coupon
+--verbose | -v | /V | - | Optional boolean for silencing easy rules (default is true)
 
 ### JSON Input Examples
 #### Carts

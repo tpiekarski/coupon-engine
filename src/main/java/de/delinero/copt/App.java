@@ -38,7 +38,7 @@ public class App {
             System.out.printf(String.format("%s%n", Message.getMessageByResults(validationResult, applicationResult)));
 
         } catch (InvalidArgumentsException exception) {
-            System.out.printf("Usage: java -cp <classpath> de.delinero.copt.App cart.json coupon.json [silent]%n");
+            System.out.printf("Usage: java -cp <classpath> de.delinero.copt.App [-v] -c cart.json -p coupon.json%n");
         }
     }
 
