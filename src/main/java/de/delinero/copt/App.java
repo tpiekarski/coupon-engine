@@ -39,14 +39,16 @@ public class App {
 
         } catch (InvalidArgumentsException exception) {
             System.out.printf("Usage: java -cp <classpath> de.delinero.copt.App [-v] -c cart.json -p coupon.json%n");
+        } catch (PayloadFileException exception) {
+            System.err.printf("Failed opening payload file %s, aborting.%n", exception.getFilename());
         }
     }
 
-    private static String getPayloadFile(String filename) {
+    private static String getPayloadFile(String filename) throws PayloadFileException {
         try {
             return new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
         } catch (IOException exception) {
-            throw new PayloadFileException(exception);
+            throw new PayloadFileException(filename);
         }
     }
 

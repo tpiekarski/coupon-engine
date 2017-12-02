@@ -1,9 +1,14 @@
 package de.delinero.copt.exceptions;
 
-public class PayloadFileException extends RuntimeException {
+public class PayloadFileException extends Exception {
 
-    public PayloadFileException(Exception exception) {
-        System.err.println(String.format("Failed opening payload file, aborting.%n%s", exception.getMessage()));
+    private final String filename;
+
+    public PayloadFileException(String filename) {
+        this.filename = filename;
     }
 
+    public String getFilename() {
+        return filename;
+    }
 }

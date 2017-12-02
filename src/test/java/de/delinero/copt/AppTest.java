@@ -1,11 +1,8 @@
 package de.delinero.copt;
 
-import de.delinero.copt.exceptions.PayloadFileException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -14,16 +11,14 @@ import static org.junit.Assert.assertEquals;
 
 public class AppTest {
 
-    private ByteArrayOutputStream outputStream;
-
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
+    private ByteArrayOutputStream testStream;
 
     @Before
     public void setUp() {
-        outputStream = new ByteArrayOutputStream();
+        testStream = new ByteArrayOutputStream();
 
-        System.setOut(new PrintStream(outputStream));
+        System.setOut(new PrintStream(testStream));
+        System.setErr(new PrintStream(testStream));
     }
 
     @After
@@ -43,7 +38,7 @@ public class AppTest {
 
         assertEquals(
             "Result: The coupon is valid and could be applied to the cart. (Validation: true, Application: true)",
-            stripNewline(outputStream.toString())
+            stripNewline(testStream.toString())
         );
 
     }
@@ -56,16 +51,20 @@ public class AppTest {
 
         assertEquals(
             "Usage: java -cp <classpath> de.delinero.copt.App [-v] -c cart.json -p coupon.json",
-            stripNewline(outputStream.toString())
+            stripNewline(testStream.toString())
         );
     }
 
     @Test
-    public void testAppIsThrowingPayloadFileException() {
+    public void testAppPayloadErrorOutput() {
         String[] args = { "--cart", "nowhere-to-be-found.json", "--coupon", "hidden-in-plain-sight.json" };
 
-        exception.expect(PayloadFileException.class);
         App.main(args);
+
+        assertEquals(
+            "Failed opening payload file nowhere-to-be-found.json, aborting.",
+            stripNewline(testStream.toString())
+        );
     }
 
     private String stripNewline(String input) {
