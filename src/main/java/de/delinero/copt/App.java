@@ -5,7 +5,9 @@ import com.google.inject.Injector;
 import de.delinero.copt.builders.CartBuilder;
 import de.delinero.copt.builders.CouponBuilder;
 import de.delinero.copt.engines.CouponEngine;
+import de.delinero.copt.exceptions.InvalidArgumentsException;
 import de.delinero.copt.exceptions.PayloadFileException;
+import de.delinero.copt.models.Arguments;
 import de.delinero.copt.models.Cart;
 import de.delinero.copt.models.Coupon;
 import de.delinero.copt.models.Message;
@@ -18,30 +20,26 @@ import java.nio.file.Paths;
 
 public class App {
 
-    private static String cartFilename;
-    private static String couponFilename;
-    private static Boolean silent;
-
     public static void main(String[] args) {
-        if (! parseArguments(args)) {
-            System.out.printf("Usage: java -cp <classpath> de.delinero.copt.App cart.json coupon.json [silent]%n");
-
-            return;
-        }
-
         Injector injector = Guice.createInjector(new CouponEngineModule());
 
-        CartBuilder cartBuilder = injector.getInstance(CartBuilder.class);
-        CouponBuilder couponBuilder = injector.getInstance(CouponBuilder.class);
-        CouponEngine couponEngine = new CouponEngine(silent);
+        try {
+            Arguments arguments = new Arguments(args);
+            CartBuilder cartBuilder = injector.getInstance(CartBuilder.class);
+            CouponBuilder couponBuilder = injector.getInstance(CouponBuilder.class);
+            CouponEngine couponEngine = new CouponEngine(arguments.getSilence());
 
-        Cart cart = cartBuilder.build(getPayloadFile(cartFilename));
-        Coupon coupon = couponBuilder.build(getPayloadFile(couponFilename));
+            Cart cart = cartBuilder.build(getPayloadFile(arguments.getCartFilename()));
+            Coupon coupon = couponBuilder.build(getPayloadFile(arguments.getCouponFilename()));
 
-        Boolean validationResult = couponEngine.evaluate(cart, coupon.getValidationRules());
-        Boolean applicationResult = couponEngine.evaluate(cart, coupon.getApplicationRules());
+            Boolean validationResult = couponEngine.evaluate(cart, coupon.getValidationRules());
+            Boolean applicationResult = couponEngine.evaluate(cart, coupon.getApplicationRules());
 
-        System.out.printf(String.format("%s%n", Message.getMessageByResults(validationResult, applicationResult)));
+            System.out.printf(String.format("%s%n", Message.getMessageByResults(validationResult, applicationResult)));
+
+        } catch (InvalidArgumentsException exception) {
+            System.out.printf("Usage: java -cp <classpath> de.delinero.copt.App cart.json coupon.json [silent]%n");
+        }
     }
 
     private static String getPayloadFile(String filename) {
@@ -50,23 +48,6 @@ public class App {
         } catch (IOException exception) {
             throw new PayloadFileException(exception);
         }
-    }
-
-    private static Boolean parseArguments(String[] args) {
-
-        if (args.length == 2) {
-            cartFilename = args[0];
-            couponFilename = args[1];
-            silent = true;
-        } else if (args.length == 3) {
-            cartFilename = args[0];
-            couponFilename = args[1];
-            silent = Boolean.valueOf(args[2]);
-        } else {
-            return false;
-        }
-
-        return true;
     }
 
 }
