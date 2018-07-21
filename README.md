@@ -1,7 +1,7 @@
 Coupon Engine Prototype
 ---
 [![Build Status](https://travis-ci.org/tpiekarski/coupon-engine.svg?branch=master)](https://travis-ci.org/tpiekarski/coupon-engine) 
-[![Quality Gate Status](https://sonarcloud.io/api/badges/gate?key=de.delinero.copt:coupon-prototype)](https://sonarcloud.io/dashboard?id=de.delinero.copt%3Acoupon-prototype)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=de.delinero.copt%3Acoupon-prototype&metric=alert_status)](https://sonarcloud.io/dashboard?id=de.delinero.copt%3Acoupon-prototype)
 [![Coverage Status](https://coveralls.io/repos/github/tpiekarski/coupon-engine/badge.svg?branch=master)](https://coveralls.io/github/tpiekarski/coupon-engine?branch=master)
 
 *A prototype for evaluating coupon rules driven by [Easy Rules](https://github.com/j-easy/easy-rules)
