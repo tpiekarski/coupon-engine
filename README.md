@@ -47,7 +47,7 @@ mvn package
 2.| [Apache Maven Shade Plugin](https://maven.apache.org/plugins/maven-shade-plugin/) | 3.1.0
 3.| [Maven Coveralls Plugin](https://github.com/trautonen/coveralls-maven-plugin) | 4.3.0
 4.| [Easy Rules Core](https://github.com/j-easy/easy-rules) | 3.0.0
-5.| [FasterXML Jackson Core](https://github.com/FasterXML/jackson-core) | 2.9.2
+5.| [FasterXML Jackson Core](https://github.com/FasterXML/jackson-core) | 2.9.10.4
 6.| [Google Guice Inject](https://github.com/google/guice) | 4.1.0
 7.| [Jacoco](https://github.com/jacoco/jacoco) | 0.7.7.201606060606
 8.| [jUnit](https://github.com/junit-team/junit4) | 4.12
