@@ -2,7 +2,7 @@ os: linux
 dist: bionic
 language: java
 jdk:
-  oraclejdk8
-  openjdk8
+  openjdk10
+  openjdk11
 after_success:
   mvn jacoco:report coveralls:report sonar:sonar -Dsonar.organization=$SONARCLOUD_ORG -Dsonar.host.url=$SONARCLOUD_HOST -Dsonar.login=$SONARCLOUD_TOKEN
