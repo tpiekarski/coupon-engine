@@ -24,7 +24,7 @@
         <pitest.target.classes>de.delinero.copt.*</pitest.target.classes>
         <pitest.target.tests>${pitest.target.classes}</pitest.target.tests>
         <pitest.version>1.2.4</pitest.version>
-        <spring.expression.version>5.0.1.RELEASE</spring.expression.version>
+        <spring.expression.version>5.2.21.RELEASE</spring.expression.version>
     </properties>
     <build>
         <plugins>
