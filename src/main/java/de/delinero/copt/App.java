@@ -17,7 +17,7 @@ import de.delinero.copt.modules.CouponEngineModule;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 
 public class App {
 
@@ -49,7 +49,7 @@ public class App {
 
     private static String getPayloadFile(String filename) throws PayloadFileException {
         try {
-            return new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
+            return new String(Files.readAllBytes(Path.of(filename)), StandardCharsets.UTF_8);
         } catch (IOException exception) {
             throw new PayloadFileException(filename);
         }

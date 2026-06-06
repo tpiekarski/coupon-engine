@@ -31,7 +31,7 @@ public class CartBuilderTest {
         String payload = FixtureLoader.loadAsString("/builders/cart.json");
         Cart testCart = cartBuilder.build(payload);
 
-        assertEquals(new Integer(100), testCart.getValue());
+        assertEquals(Integer.valueOf(100), testCart.getValue());
         assertEquals("ABC", testCart.getCode());
 
         assertEquals(payload, objectMapper.writeValueAsString(testCart));
