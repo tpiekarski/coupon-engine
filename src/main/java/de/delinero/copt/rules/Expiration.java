@@ -24,7 +24,7 @@ public class Expiration extends AbstractCouponRule {
 
         Optional<CouponRule> rule = ruleSet.getRuleByName(this.name);
 
-        if (! rule.isPresent()) {
+        if (rule.isEmpty()) {
             return false;
         }
 

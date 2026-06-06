@@ -31,7 +31,7 @@ public class CouponBuilderTest {
         String payload = FixtureLoader.loadAsString("/builders/coupon/input.json");
         Coupon testCoupon = couponBuilder.build(payload);
 
-        assertEquals(new Integer(20), testCoupon.getDiscount());
+        assertEquals(Integer.valueOf(20), testCoupon.getDiscount());
         assertEquals("percentage", testCoupon.getType());
 
         assertEquals(
